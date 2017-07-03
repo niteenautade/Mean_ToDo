@@ -1,11 +1,25 @@
 // app/routes.js
-module.exports = function(app, passport) {
+module.exports = function(app, passport,express,path) {
 
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
+    });
+
+    app.get('/loggedIn', function(req, res) {
+        if(req.user){
+            res.redirect('app/index.html');
+        }
+        else res.redirect('/login');
+    });
+
+    app.get('/app', function(req, res) {
+        if(req.user){
+            res.redirect('app/index.html');
+        }
+        else res.redirect('/login');
     });
 
     // =====================================
@@ -20,7 +34,7 @@ module.exports = function(app, passport) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/loggedIn', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
