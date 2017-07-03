@@ -5,10 +5,10 @@ webpackJsonp([1,4],{
 
 exports = module.exports = __webpack_require__(44)(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto:300);", ""]);
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".main{\r\n    width: 50%;\r\n    margin:0 auto;\r\n}\r\nli{\r\n    font-size : 1.5em;\r\n    padding:5px 0px 5px 0px;\r\n}\r\nli:nth-child(odd){\r\n    background-color : #F2F2F2;\r\n}\r\nli:nth-child(even){\r\n    background-color : #FCFCFC;\r\n}\r\nul{\r\n    padding:0;\r\n    list-style: none;    \r\n}\r\n.spanrightmargin{\r\n    margin-right: 50px;\r\n}\r\n.title{\r\n    margin-top:0;\r\n    background-color: #1976D2;\r\n    padding : 20px 0px 20px 0px;\r\n    color : white;\r\n    font-family: 'Roboto', sans-serif;\r\n}", ""]);
 
 // exports
 
@@ -21,7 +21,7 @@ module.exports = module.exports.toString();
 /***/ 134:
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\n  {{title}}\n</h1>\n"
+module.exports = "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\n<div class=\"main\">\n  <div class=\"text-center\">\n    <h1 class=\"title\">To-Do App</h1>\n    <div class=\"row\">\n      <div class=\"col-md-10\">\n        <input type=\"text\" name=\"addItem\" placeholder=\"Add Item\" class=\"form-control\">\n      </div>\n      <div class=\"col-md-2\">\n        <button class=\"btn btn-default\">Add Item</button>\n      </div>\n    </div>\n    \n    \n    <div>\n      <ul>\n        <li>\n            \n        </li>\n      </ul>\n    </div>\n  </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n"
 
 /***/ }),
 

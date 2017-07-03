@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+.main{
+    width: 50%;
+    margin:0 auto;
+}
+li{
+    font-size : 1.5em;
+    padding:5px 0px 5px 0px;
+}
+li:nth-child(odd){
+    background-color : #F2F2F2;
+}
+li:nth-child(even){
+    background-color : #FCFCFC;
+}
+ul{
+    padding:0;
+    list-style: none;    
+}
+.spanrightmargin{
+    margin-right: 50px;
+}
+.title{
+    margin-top:0;
+    background-color: #1976D2;
+    padding : 20px 0px 20px 0px;
+    color : white;
+    font-family: 'Roboto', sans-serif;
+}
