@@ -89,7 +89,7 @@ module.exports = "<!-- views/index.ejs -->\n<!doctype html>\n<html>\n<head>\n   
 /***/ 155:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- views/login.ejs -->\n<!doctype html>\n<html>\n<head>\n    <title>To Do</title>\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\n    <style>\n        body        { padding-top:80px; }\n    </style>\n</head>\n<body>\n<div class=\"container\">\n\n<div class=\"col-sm-6 col-sm-offset-3\">\n\n    <h1><span class=\"fa fa-sign-in\"></span> Login</h1>\n\n    <!-- show any messages that come back with authentication -->\n   <!-- <% if (message.length > 0) { %>\n        <div class=\"alert alert-danger\"><%= message %></div>\n    <% } %>-->\n\n    <!-- LOGIN FORM -->\n    <form action=\"/login\" method=\"post\">\n        <div class=\"form-group\">\n            <label>Email</label>\n            <input type=\"text\" class=\"form-control\" name=\"email\">\n        </div>\n        <div class=\"form-group\">\n            <label>Password</label>\n            <input type=\"password\" class=\"form-control\" name=\"password\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\">Login</button>\n    </form>\n\n    <hr>\n\n    <p>Need an account? <a href=\"/signup\">Signup</a></p>\n    <p>Or go <a href=\"/\">home</a>.</p>\n\n</div>\n\n</div>\n</body>\n</html>\n"
+module.exports = "<!-- views/login.ejs -->\n<!doctype html>\n<html>\n<head>\n    <title>To Do</title>\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\n    <style>\n        body        { padding-top:80px; }\n    </style>\n</head>\n<body>\n<div class=\"container\">\n\n<div class=\"col-sm-6 col-sm-offset-3\">\n\n    <h1><span class=\"fa fa-sign-in\"></span> Login</h1>\n\n    <!-- show any messages that come back with authentication -->\n   <!-- <% if (message.length > 0) { %>\n        <div class=\"alert alert-danger\"><%= message %></div>\n    <% } %>-->\n\n    <!-- LOGIN FORM -->\n    <form (ngSubmit)=\"onSubmit(loginForm.value)\" #loginForm=\"ngForm\">\n        <div class=\"form-group\">\n            <label>Email</label>\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\n        </div>\n        <div class=\"form-group\">\n            <label>Password</label>\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\">Login</button>\n    </form>\n\n    <hr>\n\n    <p>Need an account? <a href=\"/signup\">Signup</a></p>\n    <p>Or go <a href=\"/\">home</a>.</p>\n\n</div>\n\n</div>\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -100,15 +100,15 @@ module.exports = "<p>\n  profile works!\n</p>\n"
 
 /***/ }),
 
-/***/ 187:
+/***/ 188:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(82);
+module.exports = __webpack_require__(83);
 
 
 /***/ }),
 
-/***/ 81:
+/***/ 82:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -117,12 +117,12 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 81;
+webpackEmptyContext.id = 82;
 
 
 /***/ }),
 
-/***/ 82:
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -180,8 +180,8 @@ AppComponent = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__profile_profile_component__ = __webpack_require__(94);
@@ -277,6 +277,9 @@ IndexComponent = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -288,9 +291,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(http) {
+        this.http = http;
     }
+    LoginComponent.prototype.onSubmit = function (data) {
+        /*var headers = new Headers();
+        headers.append('Content-Type','application/json;charset=utf-8');*/
+        console.log('yahoooooo', data);
+        this.http.post('/login', data).subscribe(function () { }, function (err) { return console.log(err); });
+    };
     LoginComponent.prototype.ngOnInit = function () {
     };
     return LoginComponent;
@@ -301,9 +313,10 @@ LoginComponent = __decorate([
         template: __webpack_require__(155),
         styles: [__webpack_require__(151)]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], LoginComponent);
 
+var _a;
 //# sourceMappingURL=login.component.js.map
 
 /***/ }),
@@ -361,5 +374,5 @@ var environment = {
 
 /***/ })
 
-},[187]);
+},[188]);
 //# sourceMappingURL=main.bundle.js.map
