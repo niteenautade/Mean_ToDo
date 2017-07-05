@@ -82,21 +82,21 @@ module.exports = "<router-outlet></router-outlet>"
 /***/ 154:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- views/index.ejs -->\r\n<!doctype html>\r\n<html>\r\n<head>\r\n    <title>To Do</title>\r\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\r\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\r\n    <style>\r\n        body        { padding-top:80px; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n\r\n    <div class=\"jumbotron text-center\">\r\n        <h1><span class=\"fa fa-lock\"></span> To Do</h1>\r\n\r\n        <p>Login or Register with:</p>\r\n        \r\n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Login</a>\r\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Signup</a>\r\n        \r\n    </div>\r\n\r\n</div>\r\n</body>\r\n</html>\r\n"
+module.exports = "<!-- views/index.ejs -->\n<!doctype html>\n<html>\n<head>\n    <title>To Do</title>\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\n    <style>\n        body        { padding-top:80px; }\n    </style>\n</head>\n<body>\n<div class=\"container\">\n\n    <div class=\"jumbotron text-center\">\n        <h1><span class=\"fa fa-lock\"></span> To Do</h1>\n\n        <p>Login or Register with:</p>\n        \n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Login</a>\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Signup</a>\n        \n    </div>\n\n</div>\n</body>\n</html>\n"
 
 /***/ }),
 
 /***/ 155:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- views/login.ejs -->\r\n<!doctype html>\r\n<html>\r\n<head>\r\n    <title>To Do</title>\r\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\r\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\r\n    <style>\r\n        body        { padding-top:80px; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n\r\n<div class=\"col-sm-6 col-sm-offset-3\">\r\n\r\n    <h1><span class=\"fa fa-sign-in\"></span> Login</h1>\r\n\r\n    <!-- show any messages that come back with authentication -->\r\n   <!-- <% if (message.length > 0) { %>\r\n        <div class=\"alert alert-danger\"><%= message %></div>\r\n    <% } %>-->\r\n\r\n    <!-- LOGIN FORM -->\r\n    <form (ngSubmit)=\"onSubmit(loginForm.value)\" #loginForm=\"ngForm\">\r\n        <div class=\"form-group\">\r\n            <label>Email</label>\r\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\r\n        </div>\r\n\r\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\">Login</button>\r\n    </form>\r\n\r\n    <hr>\r\n\r\n    <p>Need an account? <a href=\"/signup\">Signup</a></p>\r\n    <p>Or go <a href=\"/\">home</a>.</p>\r\n\r\n</div>\r\n\r\n</div>\r\n</body>\r\n</html>\r\n"
+module.exports = "<!-- views/login.ejs -->\n<!doctype html>\n<html>\n<head>\n    <title>To Do</title>\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\n    <style>\n        body        { padding-top:80px; }\n    </style>\n</head>\n<body>\n<div class=\"container\">\n\n<div class=\"col-sm-6 col-sm-offset-3\">\n\n    <h1><span class=\"fa fa-sign-in\"></span> Login</h1>\n\n    <!-- show any messages that come back with authentication -->\n   <!-- <% if (message.length > 0) { %>\n        <div class=\"alert alert-danger\"><%= message %></div>\n    <% } %>-->\n\n    <!-- LOGIN FORM -->\n    <form (ngSubmit)=\"onSubmit(loginForm.value)\" #loginForm=\"ngForm\">\n        <div class=\"form-group\">\n            <label>Email</label>\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\n        </div>\n        <div class=\"form-group\">\n            <label>Password</label>\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\">Login</button>\n    </form>\n\n    <hr>\n\n    <p>Need an account? <a href=\"/signup\">Signup</a></p>\n    <p>Or go <a href=\"/\">home</a>.</p>\n\n</div>\n\n</div>\n</body>\n</html>\n"
 
 /***/ }),
 
 /***/ 156:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  profile works!\r\n</p>\r\n"
+module.exports = "<p>\n  profile works!\n</p>\n"
 
 /***/ }),
 
@@ -302,13 +302,13 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.onSubmit = function (data) {
         var _this = this;
-        /*var headers = new Headers();
-        headers.append('Content-Type','application/json;charset=utf-8');*/
         console.log('yahoooooo', data);
-        this.http.post('/login', data).subscribe(function (resp) {
-            console.log("respoooooooo", resp);
+        this.http.post('/login', data).subscribe(function (res) {
+            var user = res.json();
+            console.log("respoooooooo", user['local']);
+            localStorage.setItem('email', user['local']['email']);
+            localStorage.setItem('password', user['local']['password']);
             _this.router.navigateByUrl('/profile');
-            // this.router.navigateByUrl(...)
         }, function (err) { return console.log(err); });
     };
     LoginComponent.prototype.ngOnInit = function () {
