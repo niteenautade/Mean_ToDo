@@ -7,9 +7,8 @@ module.exports = function(app, passport,express,path) {
     /*app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });*/
-    app.get('/*', function(req, res) {
-        res.sendFile(path.join(__dirname, '/../src/app/dist/index.html'));
-    });
+    
+    
     /*app.get('/loggedIn', function(req, res) {
         if(req.user){
             res.redirect('app/index.html');
@@ -40,6 +39,11 @@ module.exports = function(app, passport,express,path) {
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
+
+    app.get('/profile',function(req,res){
+        console.log('buss buss',req.user);
+        res.send(req.user);
+    });
     // =====================================
     // SIGNUP ==============================
     // =====================================
@@ -67,6 +71,7 @@ module.exports = function(app, passport,express,path) {
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
         });
+        res.redirect("http://google.com")
     });*/
 
     // =====================================
@@ -75,6 +80,9 @@ module.exports = function(app, passport,express,path) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+    app.get('/*', function(req, res) {
+        res.sendFile(path.join(__dirname, '/../src/app/dist/index.html'));
     });
 };
 
