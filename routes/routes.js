@@ -4,33 +4,35 @@ module.exports = function(app, passport,express,path) {
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-    app.get('/', function(req, res) {
+    /*app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
+    });*/
+    app.get('/*', function(req, res) {
+        res.sendFile(path.join(__dirname, '/../src/app/dist/index.html'));
     });
-
-    app.get('/loggedIn', function(req, res) {
+    /*app.get('/loggedIn', function(req, res) {
         if(req.user){
             res.redirect('app/index.html');
         }
         else res.redirect('/login');
-    });
+    });*/
 
-    app.get('/app', function(req, res) {
+    /*app.get('/app', function(req, res) {
         if(req.user){
             res.redirect('app/index.html');
         }
         else res.redirect('/login');
-    });
+    });*/
 
     // =====================================
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {
+    /*app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
-    });
+    });*/
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
@@ -61,11 +63,11 @@ module.exports = function(app, passport,express,path) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function(req, res) {
+    /*app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
             user : req.user // get the user out of session and pass to template
         });
-    });
+    });*/
 
     // =====================================
     // LOGOUT ==============================
