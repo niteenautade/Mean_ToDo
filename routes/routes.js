@@ -81,6 +81,7 @@ module.exports = function(app, passport,express,path) {
         req.logout();
         res.redirect('/');
     });
+    
     app.get('/*', function(req, res) {
         res.sendFile(path.join(__dirname, '/../src/app/dist/index.html'));
     });
