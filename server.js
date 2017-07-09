@@ -30,7 +30,7 @@ app.use(bodyParser()); // get information from html forms
 app.set('view engine', 'html'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch', cookie: { maxAge: 60000 } })); // session secret
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch', cookie: {  } })); // session secret ...maxAge: 60000
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

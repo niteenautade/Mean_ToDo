@@ -8,10 +8,10 @@ import { Globals } from './global';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { AuthGuard } from './authguard.service'
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent,canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent}
 ];
 
@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [Globals],
+  providers: [Globals,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

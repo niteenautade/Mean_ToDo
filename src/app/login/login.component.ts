@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         console.log("respoooooooo",user['local']);
         localStorage.setItem('email', user['local']['email']);
         localStorage.setItem('password', user['local']['password']);
-        this.router.navigateByUrl('/profile');        
+        this.router.navigateByUrl('/');        
       },
       err=> console.log(err)
     );
