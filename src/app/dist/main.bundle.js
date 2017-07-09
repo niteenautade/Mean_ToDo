@@ -5,10 +5,10 @@ webpackJsonp([1,4],{
 
 exports = module.exports = __webpack_require__(15)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto:300);", ""]);
+
 
 // module
-exports.push([module.i, ".main{\r\n    width: 50%;\r\n    margin:0 auto;\r\n}\r\nli{\r\n    font-size : 1.5em;\r\n    padding:5px 0px 5px 0px;\r\n}\r\nli:nth-child(odd){\r\n    background-color : #F2F2F2;\r\n}\r\nli:nth-child(even){\r\n    background-color : #FCFCFC;\r\n}\r\nul{\r\n    padding:0;\r\n    list-style: none;    \r\n}\r\n.spanrightmargin{\r\n    margin-right: 50px;\r\n}\r\n.title{\r\n    margin-top:0;\r\n    background-color: #1976D2;\r\n    padding : 20px 0px 20px 0px;\r\n    color : white;\r\n    font-family: 'Roboto', sans-serif;\r\n}", ""]);
+exports.push([module.i, "body,html{\r\n    margin: 0 auto;\r\n}\r\n.nav-head{\r\n    margin: 0 auto;\r\n    padding: 10px 0px 10px 40px;\r\n}", ""]);
 
 // exports
 
@@ -75,28 +75,28 @@ module.exports = module.exports.toString();
 /***/ 153:
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>"
+module.exports = "<div style=\"width:100%;background-color:crimson;color:white;\">\r\n        <h2 class=\"nav-head\">To-Do APP</h2>\r\n</div>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
 /***/ 154:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- views/index.ejs -->\n<!doctype html>\n<html>\n<head>\n    <title>To Do</title>\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\n    <style>\n        body        { padding-top:80px; }\n    </style>\n</head>\n<body>\n<div class=\"container\">\n\n    <div class=\"jumbotron text-center\">\n        <h1><span class=\"fa fa-lock\"></span> To Do</h1>\n\n        <p>Login or Register with:</p>\n        \n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Login</a>\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Signup</a>\n        \n    </div>\n\n</div>\n</body>\n</html>\n"
+module.exports = "<!-- views/index.ejs -->\r\n<!doctype html>\r\n<html>\r\n<head>\r\n    <title>To Do</title>\r\n    <style>\r\n        body        { padding-top:80px; }\r\n    </style>\r\n</head>\r\n<body>\r\n    \r\n    <div class=\"container\">\r\n\r\n        <div class=\"jumbotron text-center\">\r\n            <h1><span class=\"fa fa-lock\"></span> To Do</h1>\r\n\r\n            <p>Login or Register with:</p>\r\n            \r\n            <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Login</a>\r\n            <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Signup</a>\r\n            \r\n        </div>\r\n\r\n    </div>\r\n</body>\r\n</html>\r\n"
 
 /***/ }),
 
 /***/ 155:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- views/login.ejs -->\n<!doctype html>\n<html>\n<head>\n    <title>To Do</title>\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\n    <style>\n        body        { padding-top:80px; }\n    </style>\n</head>\n<body>\n<div class=\"container\">\n\n<div class=\"col-sm-6 col-sm-offset-3\">\n\n    <h1><span class=\"fa fa-sign-in\"></span> Login</h1>\n\n    <!-- show any messages that come back with authentication -->\n   <!-- <% if (message.length > 0) { %>\n        <div class=\"alert alert-danger\"><%= message %></div>\n    <% } %>-->\n\n    <!-- LOGIN FORM -->\n    <form (ngSubmit)=\"onSubmit(loginForm.value)\" #loginForm=\"ngForm\">\n        <div class=\"form-group\">\n            <label>Email</label>\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\n        </div>\n        <div class=\"form-group\">\n            <label>Password</label>\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\">Login</button>\n    </form>\n\n    <hr>\n\n    <p>Need an account? <a href=\"/signup\">Signup</a></p>\n    <p>Or go <a href=\"/\">home</a>.</p>\n\n</div>\n\n</div>\n</body>\n</html>\n"
+module.exports = "<!-- views/login.ejs -->\r\n<!doctype html>\r\n<html>\r\n<head>\r\n    <title>To Do</title>\r\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\"> <!-- load bootstrap css -->\r\n    <link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\"> <!-- load fontawesome -->\r\n    <style>\r\n        body        { padding-top:80px; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n\r\n<div class=\"col-sm-6 col-sm-offset-3\">\r\n\r\n    <h1><span class=\"fa fa-sign-in\"></span> Login</h1>\r\n\r\n    <!-- show any messages that come back with authentication -->\r\n   <!-- <% if (message.length > 0) { %>\r\n        <div class=\"alert alert-danger\"><%= message %></div>\r\n    <% } %>-->\r\n\r\n    <!-- LOGIN FORM -->\r\n    <form (ngSubmit)=\"onSubmit(loginForm.value)\" #loginForm=\"ngForm\">\r\n        <div class=\"form-group\">\r\n            <label>Email</label>\r\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\r\n        </div>\r\n\r\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\">Login</button>\r\n    </form>\r\n\r\n    <hr>\r\n\r\n    <p>Need an account? <a href=\"/signup\">Signup</a></p>\r\n    <p>Or go <a href=\"/\">home</a>.</p>\r\n\r\n</div>\r\n\r\n</div>\r\n</body>\r\n</html>\r\n"
 
 /***/ }),
 
 /***/ 156:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  profile works!\n</p>\n"
+module.exports = "<p>\r\n  profile works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -184,9 +184,9 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__profile_profile_component__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login_component__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__index_index_component__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_component__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__index_index_component__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__profile_profile_component__ = __webpack_require__(94);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -204,9 +204,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var appRoutes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_8__index_index_component__["a" /* IndexComponent */] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] },
-    { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_6__profile_profile_component__["a" /* ProfileComponent */] }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_7__index_index_component__["a" /* IndexComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */] },
+    { path: 'profile', component: __WEBPACK_IMPORTED_MODULE_8__profile_profile_component__["a" /* ProfileComponent */] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -217,9 +217,9 @@ AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__profile_profile_component__["a" /* ProfileComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__index_index_component__["a" /* IndexComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__index_index_component__["a" /* IndexComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__profile_profile_component__["a" /* ProfileComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */].forRoot(appRoutes),
@@ -302,12 +302,13 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.onSubmit = function (data) {
         var _this = this;
-        console.log('yahoooooo', data);
+        console.log('making post request => ', data);
         this.http.post('/login', data).subscribe(function (res) {
             var user = res.json();
+            //console.log("ress",res);
             console.log("respoooooooo", user['local']);
-            localStorage.setItem('email', user['local']['email']);
-            localStorage.setItem('password', user['local']['password']);
+            /*localStorage.setItem('email', user['local']['email']);
+            localStorage.setItem('password', user['local']['password']);*/
             _this.router.navigateByUrl('/profile');
         }, function (err) { return console.log(err); });
     };

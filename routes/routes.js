@@ -35,14 +35,13 @@ module.exports = function(app, passport,express,path) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
+        successRedirect : '/authenticated', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
-    app.get('/profile',function(req,res){
-        console.log('buss buss',req.user);
-        res.send(req.user);
+    app.get('/authenticated',isLoggedIn,function(req,res){
+        res.json(req.user);
     });
     // =====================================
     // SIGNUP ==============================
@@ -82,7 +81,7 @@ module.exports = function(app, passport,express,path) {
         res.redirect('/');
     });
     
-    app.get('/*', function(req, res) {
+    app.get('/*',isLoggedIn, function(req, res) {
         res.sendFile(path.join(__dirname, '/../src/app/dist/index.html'));
     });
 };

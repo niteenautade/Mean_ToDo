@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
+
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
@@ -17,9 +18,9 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
     LoginComponent,
-    IndexComponent
+    IndexComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
