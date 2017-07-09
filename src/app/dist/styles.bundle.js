@@ -1,21 +1,6 @@
 webpackJsonp([2,4],{
 
-/***/ 151:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(16)(false);
-// imports
-
-
-// module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\nhtml{\r\n    height:100%;\r\n}\r\nbody{\r\n    min-height: 100%;\r\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 16:
+/***/ 15:
 /***/ (function(module, exports) {
 
 /*
@@ -98,7 +83,22 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 188:
+/***/ 152:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\nhtml{\r\n    height:100%;\r\n}\r\nbody{\r\n    min-height: 100%;\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 191:
 /***/ (function(module, exports) {
 
 /*
@@ -351,7 +351,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 192:
+/***/ 195:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(88);
@@ -365,10 +365,10 @@ module.exports = __webpack_require__(88);
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(151);
+var content = __webpack_require__(152);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(188)(content, {});
+var update = __webpack_require__(191)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -386,5 +386,5 @@ if(false) {
 
 /***/ })
 
-},[192]);
+},[195]);
 //# sourceMappingURL=styles.bundle.js.map

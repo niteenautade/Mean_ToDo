@@ -8,11 +8,13 @@ import { Globals } from './global';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AuthGuard } from './authguard.service'
+import { AuthGuard } from './authguard.service';
+import { SignupComponent } from './signup/signup.component'
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent},
+  { path: 'signup', component: SignupComponent},
   { path: '**', redirectTo: ''}
 ];
 
@@ -21,7 +23,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     IndexComponent,
-    ProfileComponent
+    ProfileComponent,
+    SignupComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
