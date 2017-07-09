@@ -3,9 +3,12 @@
                 <h2 class="nav-head">
                         <a routerLink="/" routerLinkActive="active" style="text-decoration:none; color:white;">To-Do APP</a>
                 </h2>
-                <button type="button" class="btn btn-large btn-default pull-right" (click)='logout()' *ngIf="globals.getEmail()">
-                        Logout
-                </button>
+                <div class="pull-right" style="margin-right:20px;">
+                        <span *ngIf="globals.getEmail()">Welcome, {{globals.getEmail()}}</span>
+                        <button type="button" class="btn btn-large btn-default" (click)='logout()' *ngIf="globals.getEmail()">
+                                Logout
+                        </button>
+                </div>
         </div>
         
 </div>

@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
       (res)=>{
         var user = res.json();
         
-        //console.log("ress",res);
+        console.log("ress",res);
         console.log("respoooooooo",user['local']);
         localStorage.setItem('email', user['local']['email']);
         localStorage.setItem('password', user['local']['password']);
+        localStorage.setItem('id', user['_id']);
         this.router.navigateByUrl('/');        
       },
       err=> console.log(err)

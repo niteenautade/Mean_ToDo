@@ -1,4 +1,5 @@
 // app/routes.js
+var Task = require('./../models/tasks');
 module.exports = function(app, passport,express,path) {
 
     // =====================================
@@ -8,7 +9,36 @@ module.exports = function(app, passport,express,path) {
         res.render('index.ejs'); // load the index.ejs file
     });*/
     
-    
+    app.get('/api/get/:id', function(req, res){
+        // get all the task
+        console.log('userr',req.params.id);
+        var user = {};
+        user['id']=req.params.id;
+        Task.find(user, function(err, tasks) {
+        if (err) throw err;
+        res.send(tasks);
+        });
+    });
+    app.get('/api/delete/:userid/:id', function(req, res){
+        // get all the task
+        var user = {};
+        user['id']=req.params.userid;
+        user['_id']=req.params.id;
+        console.log("userr",user)
+        Task.findOneAndRemove(user, function(err, tasks) {
+        if (err) throw err;
+        console.log('Task deleted!');
+        });
+    });
+    app.post('/api/add', function(req, res) {
+       var task = req.body;
+       console.log("Taskkkkk>>>>>>>",task);
+       Task.addTask(task,function(err,task) {
+        if (err) throw err;
+        res.json(task);
+        console.log('Task added!');
+        });
+   });
     /*app.get('/loggedIn', function(req, res) {
         if(req.user){
             res.redirect('app/index.html');

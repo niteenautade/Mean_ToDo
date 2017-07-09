@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Headers } from '@angular/http';  
+import 'rxjs/add/operator/map';
+import { Router } from '@angular/router';
 import { Globals } from './../global';
 
 @Component({
@@ -7,10 +10,39 @@ import { Globals } from './../global';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-
-  constructor(private globals: Globals) { }
+  tasks = [];
+  constructor(private globals: Globals,private router:Router,private http:Http) {
+    this.getTasks();
+  }
 
   ngOnInit() {
   }
 
+  
+  getTasks(){
+    this.http.get('/api/get/'+this.globals.getId()).subscribe(res=>{
+      console.log("GotData: ",res.json());
+      this.tasks = res.json();
+    });
+  }
+
+  deleteTask(id){
+    this.http.get('/api/delete/'+this.globals.getId()+'/'+id).subscribe(
+      ()=>{}
+    );
+    this.getTasks();
+  }
+  addTask(task){
+    var headers = new Headers();
+    task['done'] = false;
+    task['email'] = this.globals.getEmail();
+    task['id'] = this.globals.getId();
+    headers.append('Content-Type','application/json;charset=utf-8');
+    console.log('yahoooooo',task);
+    this.http.post('/api/add',task,headers).subscribe(
+      ()=>{},
+      err=> console.log(err)
+    );
+    this.getTasks();
+  }
 }
