@@ -25,14 +25,30 @@
     <form (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
         <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control" [(ngModel)]="email" name="email">
+            <input type="text" class="form-control" required minlength="4" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="24" [(ngModel)]="modelEmail" name="email" id="email" #email="ngModel">
+            <div *ngIf="email.errors && (email.dirty || email.touched)"
+            class="alert alert-danger">
+            <div [hidden]="!email.errors.required">
+            Email is required
+            </div>
+            <div [hidden]="!email.errors.minlength">
+            Email must be at least 4 characters long.
+            </div>
+            <div [hidden]="!email.errors.maxlength">
+            Email cannot be more than 24 characters long.
+            </div>
+            <div [hidden]="!email.errors.pattern">
+            Email not following right pattern
+            </div>
         </div>
+        </div>
+        
         <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" [(ngModel)]="password" name="password">
+            <input type="password" required class="form-control" [(ngModel)]="modelPassword" name="password">
         </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-warning btn-lg">Login</button>
     </form>
     <p style="color:red;font-style: italic;">{{loginstatus}}</p>
     <hr>
