@@ -18,7 +18,12 @@ export class SignupComponent implements OnInit {
   }
   onSubmit(user){
     this.http.post('/signup',user).subscribe(
-      ()=>{
+      (res)=>{
+        console.log('Sign up response:',res);
+        var user = res.json();
+        localStorage.setItem('email', user['local']['email']);
+        localStorage.setItem('password', user['local']['password']);
+        localStorage.setItem('id', user['_id']);
         this.router.navigateByUrl('/');
       },
       err=> console.log(err)

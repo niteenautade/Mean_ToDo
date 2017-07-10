@@ -11,7 +11,7 @@ module.exports = function(app, passport,express,path) {
     
     app.get('/api/get/:id', function(req, res){
         // get all the task
-        console.log('userr',req.params.id);
+        console.log('/api/get/:id',req.params.id);
         var user = {};
         user['id']=req.params.id;
         Task.find(user, function(err, tasks) {
@@ -24,7 +24,7 @@ module.exports = function(app, passport,express,path) {
         var user = {};
         user['id']=req.params.userid;
         user['_id']=req.params.id;
-        console.log("userr",user)
+        console.log("/api/delete/:userid/:id",user)
         Task.findOneAndRemove(user, function(err, tasks) {
         if (err) throw err;
         console.log('Task deleted!');
@@ -77,18 +77,30 @@ module.exports = function(app, passport,express,path) {
     // SIGNUP ==============================
     // =====================================
     // show the signup form
-    app.get('/signup', function(req, res) {
+    /*app.get('/signup', function(req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('signup.ejs', { message: req.flash('signupMessage') });
+    });*/
+    app.get('/signup-success', function(req, res) {
+        console.log('Sign up Successful');
+        // render the page and pass in any flash data if it exists
+        res.json(req.user);
+        
+    });
+    app.get('/signup-failed', function(req, res) {
+        //console.log('reqss:',req);
+        // render the page and pass in any flash data if it exists
+        console.log('Console : Sign up Failed');
+        res.send('Sign up Failed');
     });
 
     // process the signup form
     // app.post('/signup', do all our passport stuff here);
      // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        successRedirect : '/signup-success', // redirect to the secure profile section
+        failureRedirect : '/signup-failed', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
     // =====================================
