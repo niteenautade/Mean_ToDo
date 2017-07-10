@@ -124,7 +124,7 @@ module.exports = function(app, passport,express,path) {
     });
     
     
-    app.get('/*',isLoggedIn, function(req, res) {
+    app.get('/*', function(req, res) {
         res.sendFile(path.join(__dirname, '/../src/app/dist/index.html'));
     });
 };

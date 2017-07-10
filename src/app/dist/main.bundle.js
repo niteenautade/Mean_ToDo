@@ -230,10 +230,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AppComponent = (function () {
     function AppComponent(router, http, globals) {
+        var _this = this;
         this.router = router;
         this.http = http;
         this.globals = globals;
         this.title = 'app works!';
+        console.log("Hello World");
+        this.http.get('/authenticated').subscribe(function (res) {
+            //console.log('Bus Bus',res.json());
+            try {
+                var user = res.json();
+                console.log('Bus Bus', user);
+                if (user['local']['email']) {
+                    console.log("User is Authenticated App comp constructor");
+                }
+            }
+            catch (e) {
+                console.log("Constructor data is not a json,Clearing LocalStorage");
+                _this.globals.clearLocalStorage();
+            }
+        });
     }
     AppComponent.prototype.logout = function () {
         var _this = this;
