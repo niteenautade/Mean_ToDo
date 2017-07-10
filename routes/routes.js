@@ -11,7 +11,7 @@ module.exports = function(app, passport,express,path) {
     
     app.get('/api/get/:id', function(req, res){
         // get all the task
-        console.log('/api/get/:id',req.params.id);
+        console.log('/api/get/:id =>',req.params.id);
         var user = {};
         user['id']=req.params.id;
         Task.find(user, function(err, tasks) {
@@ -24,7 +24,7 @@ module.exports = function(app, passport,express,path) {
         var user = {};
         user['id']=req.params.userid;
         user['_id']=req.params.id;
-        console.log("/api/delete/:userid/:id",user)
+        console.log("/api/delete/:userid/:id =>",user)
         Task.findOneAndRemove(user, function(err, tasks) {
         if (err) throw err;
         console.log('Task deleted!');
@@ -36,7 +36,7 @@ module.exports = function(app, passport,express,path) {
        Task.addTask(task,function(err,task) {
         if (err) throw err;
         res.json(task);
-        console.log('Task added!');
+        console.log('Task added in Database!');
         });
    });
     /*app.get('/loggedIn', function(req, res) {
