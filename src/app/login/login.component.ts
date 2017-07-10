@@ -11,21 +11,26 @@ import { Globals } from './../global';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http : Http,private router:Router,private globals: Globals) { }
+  constructor(private http : Http,private router:Router,private globals: Globals) {}
+  loginstatus : string = '';
   onSubmit(data){
     console.log('making post request => ',data);
     this.http.post('/login',data).subscribe(
       (res)=>{
-        var user = res.json();
-        
-        console.log("ress",res);
-        console.log("respoooooooo",user['local']);
-        localStorage.setItem('email', user['local']['email']);
-        localStorage.setItem('password', user['local']['password']);
-        localStorage.setItem('id', user['_id']);
-        this.router.navigateByUrl('/');        
-      },
-      err=> console.log(err)
+        try{
+          var user = res.json();
+          console.log("ress",res);
+          console.log("respoooooooo",user['local']);
+          localStorage.setItem('email', user['local']['email']);
+          localStorage.setItem('password', user['local']['password']);
+          localStorage.setItem('id', user['_id']);
+          this.loginstatus = '';
+          this.router.navigateByUrl('/');
+        }
+        catch(e){
+          this.loginstatus = 'Wrong Username Password Combination.Try Again';
+        }
+      }
     );
   }
   
