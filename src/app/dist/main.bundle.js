@@ -64,7 +64,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, ".app-container{\r\n    width: 60%;\r\n    margin:0 auto;     \r\n}\r\n.input-group{\r\n    padding: 40px 0px 40px 40px;\r\n}\r\nli:nth-child(odd){\r\n    background-color : #F2F2F2;\r\n    padding: 10px 0px 10px 0px;\r\n}\r\nli:nth-child(even){\r\n    background-color : #FCFCFC;\r\n    padding: 10px 0px 10px 0px;\r\n}\r\nul{\r\n    list-style: none;    \r\n}", ""]);
+exports.push([module.i, ".tab{\r\n    display: table;\r\n    height: 35px;\r\n    overflow: hidden;\r\n}\r\n.tab-cell{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n}\r\n\r\n.app-container{\r\n    width: 60%;\r\n    margin:0 auto;     \r\n}\r\n.input-group{\r\n    padding: 40px 0px 40px 40px;\r\n}\r\nli:nth-child(odd){\r\n    background-color : #F2F2F2;\r\n    \r\n}\r\nli:nth-child(even){\r\n    background-color : #FCFCFC;\r\n    \r\n}\r\nul{\r\n    list-style: none;    \r\n}\r\n.taskHeader{\r\n    margin: 0 auto;\r\n    text-align:center;\r\n}\r\n", ""]);
 
 // exports
 
@@ -138,7 +138,7 @@ module.exports = "<div class=\"nav\">\r\n        <div class=\"nav-inner\">\r\n  
 /***/ 159:
 /***/ (function(module, exports) {
 
-module.exports = "<title>To Do</title>\r\n\r\n<div class=\"container\" *ngIf=\"!globals.getEmail();else app\">\r\n    <div class=\"jumbotron text-center\">\r\n        <h1><span class=\"fa fa-lock\"></span> To Do</h1>\r\n        <p>Login or Register with:</p>\r\n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Login</a>\r\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Signup</a>\r\n    </div>\r\n</div>\r\n\r\n<ng-template #app>\r\n    <div style=\"text-align:center;\">\r\n        <div class=\"app-container\">\r\n            <form class=\"input-group\" (ngSubmit)=\"addTask(taskForm.value)\" #taskForm=\"ngForm\">\r\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"task\" name=\"task\">\r\n                <span class=\"input-group-btn\">\r\n                        <button class=\"btn btn-default\" type=\"submit\">Add Task</button>\r\n                </span>\r\n            </form>\r\n            \r\n\r\n            <div>\r\n                <ul>\r\n                    <li *ngFor='let task of tasks'>\r\n                        {{task.task}}\r\n                        <span><button class=\"btn btn-default\" (click)=\"deleteTask(task._id)\" >Delete</button></span>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    \r\n</ng-template>\r\n\r\n"
+module.exports = "<title>To Do</title>\r\n\r\n<div class=\"container\" *ngIf=\"!globals.getEmail();else app\">\r\n    <div class=\"jumbotron text-center\">\r\n        <h1><span class=\"fa fa-lock\"></span> To Do</h1>\r\n        <p>Login or Register with:</p>\r\n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Login</a>\r\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-default\"><span class=\"fa fa-user\"></span> Local Signup</a>\r\n    </div>\r\n</div>\r\n\r\n<ng-template #app>\r\n    <div>\r\n        <div class=\"app-container\">\r\n            <form class=\"input-group\" (ngSubmit)=\"addTask(taskForm.value)\" #taskForm=\"ngForm\" style=\"text-align:center;\">\r\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"task\" name=\"task\">\r\n                <span class=\"input-group-btn\">\r\n                        <button class=\"btn btn-default\" type=\"submit\">Add Task</button>\r\n                </span>\r\n            </form>\r\n            \r\n            <h3 class=\"taskHeader\" style=\"text-align:center;\">Your Tasks</h3>\r\n            <p style=\"text-align:center;\">(Click on a Task if it is completed)</p>\r\n            <div>\r\n                <ul>\r\n                    <li *ngFor='let task of tasks' class=\"row\">\r\n                        <div class=\"col-md-4\"></div>\r\n                        <div class=\"col-md-4 text-center tab\" [style.text-decoration]=\"taskDone(task.done)\" (click)=\"toggleTask(task._id,task.done)\">\r\n                            <a href=\"#\" class=\"tab-cell\" style=\"text-decoration: none;color: inherit;\">{{task.task}}</a>\r\n                        </div>\r\n                        <div class=\"col-md-4 text-right\">\r\n                            <button class=\"btn btn-default\" (click)=\"deleteTask(task._id)\" >Delete</button>\r\n                        </div>\r\n\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    \r\n</ng-template>\r\n\r\n"
 
 /***/ }),
 
@@ -237,7 +237,6 @@ var AppComponent = (function () {
         this.title = 'app works!';
         console.log("Hello World");
         this.http.get('/authenticated').subscribe(function (res) {
-            //console.log('Bus Bus',res.json());
             try {
                 var user = res.json();
                 console.log('Bus Bus', user);
@@ -451,6 +450,25 @@ var IndexComponent = (function () {
         console.log('yahoooooo', task);
         this.http.post('/api/add', task, headers).subscribe(function () { }, function (err) { return console.log(err); });
         this.getTasks();
+    };
+    IndexComponent.prototype.taskDone = function (status) {
+        //console.log("Statusssss", status);
+        if (status == 'true') {
+            return 'line-through';
+        }
+        else
+            return '';
+    };
+    IndexComponent.prototype.toggleTask = function (id, done) {
+        var _this = this;
+        var user = {};
+        user['id'] = this.globals.getId();
+        user['_id'] = id;
+        user['done'] = done;
+        this.http.post('/api/toggle/', user).subscribe(function (resp) {
+            _this.getTasks();
+            console.log('bus bus bus', resp);
+        }, function (err) { return console.log(err); });
     };
     return IndexComponent;
 }());

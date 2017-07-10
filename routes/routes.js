@@ -26,8 +26,22 @@ module.exports = function(app, passport,express,path) {
         user['_id']=req.params.id;
         console.log("/api/delete/:userid/:id =>",user)
         Task.findOneAndRemove(user, function(err, tasks) {
-        if (err) throw err;
-        console.log('Task deleted!');
+            if (err) throw err;
+            console.log('Task deleted!');
+        });
+    });
+    app.post('/api/toggle/', function(req, res){
+        // get all the task
+        var user = req.body;
+        var newDone = {};
+        if(user.done=='true')newDone['done'] = 'false';
+        else newDone['done'] = 'true';
+        
+        console.log("/api/toggle/ =>",user)
+        Task.findOneAndUpdate(user,newDone, function(err, task) {
+            if (err) throw err;
+            res.json(task);
+            console.log('Task Toggled!');
         });
     });
     app.post('/api/add', function(req, res) {

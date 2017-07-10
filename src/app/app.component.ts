@@ -14,7 +14,6 @@ export class AppComponent {
       console.log("Hello World");
       this.http.get('/authenticated').subscribe(
         (res)=>{
-          //console.log('Bus Bus',res.json());
           try{
             var user = res.json();
             console.log('Bus Bus',user);

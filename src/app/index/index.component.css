@@ -1,3 +1,13 @@
+.tab{
+    display: table;
+    height: 35px;
+    overflow: hidden;
+}
+.tab-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .app-container{
     width: 60%;
     margin:0 auto;     
@@ -7,12 +17,16 @@
 }
 li:nth-child(odd){
     background-color : #F2F2F2;
-    padding: 10px 0px 10px 0px;
+    
 }
 li:nth-child(even){
     background-color : #FCFCFC;
-    padding: 10px 0px 10px 0px;
+    
 }
 ul{
     list-style: none;    
+}
+.taskHeader{
+    margin: 0 auto;
+    text-align:center;
 }

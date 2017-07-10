@@ -45,4 +45,28 @@ export class IndexComponent implements OnInit {
     );
     this.getTasks();
   }
+
+
+  taskDone(status){
+    //console.log("Statusssss", status);
+    if(status=='true'){
+      return 'line-through';
+    }
+    else return '';
+  }
+
+  toggleTask(id,done){
+    var user = {};
+    user['id']=this.globals.getId();
+    user['_id']=id;
+    user['done']=done;
+    this.http.post('/api/toggle/',user).subscribe(
+      (resp)=>{this.getTasks();
+        console.log('bus bus bus',resp)
+      },
+      err=> console.log(err)
+
+    );
+    
+  }
 }

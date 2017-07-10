@@ -10,21 +10,28 @@
 </div>
 
 <ng-template #app>
-    <div style="text-align:center;">
+    <div>
         <div class="app-container">
-            <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm">
+            <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
                 <input type="text" class="form-control" [(ngModel)]="task" name="task">
                 <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Add Task</button>
                 </span>
             </form>
             
-
+            <h3 class="taskHeader" style="text-align:center;">Your Tasks</h3>
+            <p style="text-align:center;">(Click on a Task if it is completed)</p>
             <div>
                 <ul>
-                    <li *ngFor='let task of tasks'>
-                        {{task.task}}
-                        <span><button class="btn btn-default" (click)="deleteTask(task._id)" >Delete</button></span>
+                    <li *ngFor='let task of tasks' class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 text-center tab" [style.text-decoration]="taskDone(task.done)" (click)="toggleTask(task._id,task.done)">
+                            <a href="#" class="tab-cell" style="text-decoration: none;color: inherit;">{{task.task}}</a>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button class="btn btn-default" (click)="deleteTask(task._id)" >Delete</button>
+                        </div>
+
                     </li>
                 </ul>
             </div>
