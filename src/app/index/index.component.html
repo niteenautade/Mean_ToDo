@@ -13,14 +13,29 @@
     <div>
         <div class="app-container">
             <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
-                <input type="text" class="form-control" [(ngModel)]="task" name="task">
+                <input type="text" class="form-control" [(ngModel)]="modelTask" required minlength="1" maxlength="24" pattern="[a-zA-Z0-9\!\s\*\.\?]+" name="task" #task=ngModel>
                 <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">Add Task</button>
+                        <button class="btn btn-default" [disabled]="!taskForm.form.valid" type="submit">Add Task</button>
                 </span>
             </form>
+                <div *ngIf="task.errors && (task.dirty || task.touched)" class="alert alert-danger">
+                    <div [hidden]="!task.errors.required">
+                    Task is required
+                    </div>
+                    <div [hidden]="!task.errors.minlength">
+                    Task must be at least 1 characters long.
+                    </div>
+                    <div [hidden]="!task.errors.maxlength">
+                    Task cannot be more than 24 characters long.
+                    </div>
+                    <div [hidden]="!task.errors.pattern">
+                    Task can contain only !, *, ., ?
+                    </div>
+                </div>
             
             <h3 class="taskHeader" style="text-align:center;">Your Tasks</h3>
             <p style="text-align:center;">(Click on a Task if it is completed)</p>
+            <p *ngIf="error!=''" style="color:red;font-style: italic;text-align:center;">{{error}}</p>
             <div>
                 <ul>
                     <li *ngFor='let task of tasks' class="row">

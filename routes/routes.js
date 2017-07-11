@@ -9,18 +9,19 @@ module.exports = function(app, passport,express,path) {
         res.render('index.ejs'); // load the index.ejs file
     });*/
     
-    app.get('/api/get/:id', function(req, res){
+    app.get('/api/get/:userid',checkAuth, function(req, res){
         // get all the task
-        console.log('/api/get/:id =>',req.params.id);
+        console.log("Checkkkkkkkkk req",req.method);
+        console.log('/api/get/:userid =>',req.params.userid);
         var user = {};
-        user['id']=req.params.id;
+        user['id']=req.params.userid; //'id' refers to user ... '_id' refers to task id
         Task.find(user, function(err, tasks) {
         if (err) throw err;
         res.send(tasks);
         });
     });
-    app.get('/api/delete/:userid/:id', function(req, res){
-        // get all the task
+    app.get('/api/delete/:userid/:id',checkAuth, function(req, res){
+        // Delete a task
         var user = {};
         user['id']=req.params.userid;
         user['_id']=req.params.id;
@@ -30,9 +31,11 @@ module.exports = function(app, passport,express,path) {
             console.log('Task deleted!');
         });
     });
-    app.post('/api/toggle/', function(req, res){
+    app.post('/api/toggle/',checkAuth, function(req, res){
         // get all the task
-        var user = req.body;
+        var user = req.body; 
+        console.log('From UI ++>', user);
+        console.log('From PP ++>', req.user);
         var newDone = {};
         newDone['done'] = !user.done;
         console.log("/api/toggle/ =>",user)
@@ -42,7 +45,7 @@ module.exports = function(app, passport,express,path) {
             console.log('Task Toggled!');
         });
     });
-    app.post('/api/add', function(req, res) {
+    app.post('/api/add',checkAuth, function(req, res) {
        var task = req.body;
        console.log("Taskkkkk>>>>>>>",task);
        Task.addTask(task,function(err,task) {
@@ -150,4 +153,25 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+}
+
+function checkAuth(req, res, next){
+    console.log("Check Auth Hit");
+    if(req.method=='POST' && req.user){
+        if(req.body.id===req.user.id){
+            console.log('Check Auth ID MATCHED');
+            return next();   
+         }
+        
+    }
+    if(req.method=='GET' && req.user){
+        if(req.params.userid===req.user.id){
+            console.log('Check Auth ID MATCHED');
+            return next();   
+         }
+        
+    }
+    console.log('Check Auth ID Not Matched');
+    res.redirect('/logout');
+    
 }

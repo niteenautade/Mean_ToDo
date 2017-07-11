@@ -11,8 +11,9 @@ import { Globals } from './../global';
 })
 export class IndexComponent implements OnInit {
   tasks = [];
+  error:string='';
   constructor(private globals: Globals,private router:Router,private http:Http) {
-    this.getTasks();
+    if(this.globals.getEmail() )this.getTasks();
   }
 
   ngOnInit() {
@@ -21,9 +22,16 @@ export class IndexComponent implements OnInit {
   
   getTasks(){
     this.http.get('/api/get/'+this.globals.getId()).subscribe(res=>{
-      console.log("GotData: ",res.json());
-      this.tasks = res.json();
-    });
+      try{
+        this.tasks = res.json();
+      }
+      catch(e){
+        console.log('errrr',e);
+        this.error = ' Session Expired! Please Login Again! ';
+        window.location.reload();
+      }
+    }
+    );
   }
 
   deleteTask(id){

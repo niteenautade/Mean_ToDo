@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-
+import { Http, Headers } from '@angular/http'; 
 
 @Injectable()
 export class Globals {
-    
+  constructor(private http : Http) {}
    
   getEmail() : any{
       return localStorage.getItem('email');
@@ -18,5 +18,5 @@ export class Globals {
   clearLocalStorage(){
       return localStorage.clear();
   }
-
+ 
 }

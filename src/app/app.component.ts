@@ -16,7 +16,7 @@ export class AppComponent {
         (res)=>{
           try{
             var user = res.json();
-            console.log('Bus Bus',user);
+            console.log('App comp get request /authenticated response',user);
             if(user['local']['email']){
               console.log("User is Authenticated App comp constructor")
             }
