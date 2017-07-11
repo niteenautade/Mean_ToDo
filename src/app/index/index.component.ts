@@ -12,6 +12,7 @@ import { Globals } from './../global';
 export class IndexComponent implements OnInit {
   tasks = [];
   error:string='';
+  showLoading:boolean=false;
   constructor(private globals: Globals,private router:Router,private http:Http) {
     if(this.globals.getEmail() )this.getTasks();
   }
@@ -21,24 +22,30 @@ export class IndexComponent implements OnInit {
 
   
   getTasks(){
+    this.showLoading = true;
     this.http.get('/api/get/'+this.globals.getId()).subscribe(res=>{
-      try{
-        this.tasks = res.json();
-      }
-      catch(e){
-        console.log('errrr',e);
-        this.error = ' Session Expired! Please Login Again! ';
-        window.location.reload();
-      }
+      setTimeout(()=>{
+        this.showLoading = false;
+        try{
+          this.tasks = res.json();
+        }
+        catch(e){
+          console.log('errrr',e);
+          this.error = ' Session Expired! Please Login Again! ';
+          window.location.reload();
+        }
+      },200);
     }
     );
+    
   }
 
   deleteTask(id){
     this.http.get('/api/delete/'+this.globals.getId()+'/'+id).subscribe(
-      ()=>{}
+      (res)=>{this.getTasks();},
+      err=> console.log(err)
     );
-    this.getTasks();
+    
   }
   addTask(task){
     var headers = new Headers();
@@ -48,15 +55,15 @@ export class IndexComponent implements OnInit {
     headers.append('Content-Type','application/json;charset=utf-8');
     console.log('yahoooooo',task);
     this.http.post('/api/add',task,headers).subscribe(
-      ()=>{},
+      (res)=>{
+        this.getTasks();
+      },
       err=> console.log(err)
     );
-    this.getTasks();
   }
 
 
   taskDone(status){
-    //console.log("Statusssss", status);
     if(status==true){
       return 'line-through';
     }
@@ -69,8 +76,8 @@ export class IndexComponent implements OnInit {
     user['_id']=id;
     user['done']=done;
     this.http.post('/api/toggle/',user).subscribe(
-      (resp)=>{this.getTasks();
-        console.log('bus toggleTask index component',resp)
+      (res)=>{this.getTasks();
+        console.log('toggleTask response index component',res);
       },
       err=> console.log(err)
 

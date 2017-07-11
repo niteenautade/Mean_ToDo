@@ -8,7 +8,9 @@
         <a routerLink="/signup" routerLinkActive="active" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
     </div>
 </div>
-
+    <div *ngIf="showLoading" style="position:fixed;top:43%;left:50%">
+      <img src="loading.gif" alt="loading">
+    </div>
 <ng-template #app>
     <div>
         <div class="app-container">

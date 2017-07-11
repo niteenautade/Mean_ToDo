@@ -9,7 +9,8 @@
       "outDir": "src/app/dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "loading.gif"
       ],
       "index": "index.html",
       "main": "main.ts",
