@@ -49,7 +49,7 @@ export class IndexComponent implements OnInit {
 
   taskDone(status){
     //console.log("Statusssss", status);
-    if(status=='true'){
+    if(status==true){
       return 'line-through';
     }
     else return '';
@@ -62,7 +62,7 @@ export class IndexComponent implements OnInit {
     user['done']=done;
     this.http.post('/api/toggle/',user).subscribe(
       (resp)=>{this.getTasks();
-        console.log('bus bus bus',resp)
+        console.log('bus toggleTask index component',resp)
       },
       err=> console.log(err)
 

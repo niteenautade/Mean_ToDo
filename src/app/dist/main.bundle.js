@@ -453,7 +453,7 @@ var IndexComponent = (function () {
     };
     IndexComponent.prototype.taskDone = function (status) {
         //console.log("Statusssss", status);
-        if (status == 'true') {
+        if (status == true) {
             return 'line-through';
         }
         else
@@ -467,7 +467,7 @@ var IndexComponent = (function () {
         user['done'] = done;
         this.http.post('/api/toggle/', user).subscribe(function (resp) {
             _this.getTasks();
-            console.log('bus bus bus', resp);
+            console.log('bus toggleTask index component', resp);
         }, function (err) { return console.log(err); });
     };
     return IndexComponent;

@@ -34,9 +34,7 @@ module.exports = function(app, passport,express,path) {
         // get all the task
         var user = req.body;
         var newDone = {};
-        if(user.done=='true')newDone['done'] = 'false';
-        else newDone['done'] = 'true';
-        
+        newDone['done'] = !user.done;
         console.log("/api/toggle/ =>",user)
         Task.findOneAndUpdate(user,newDone, function(err, task) {
             if (err) throw err;
