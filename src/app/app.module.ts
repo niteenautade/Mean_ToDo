@@ -7,14 +7,14 @@ import { AppComponent } from './app.component';
 import { Globals } from './global';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AuthGuard } from './authguard.service';
-import { SignupComponent } from './signup/signup.component'
+import { AuthGuard,LoginGuard } from './authguard.service';
+import { SignupComponent } from './signup/signup.component';
+import { OldtasksComponent } from './oldtasks/oldtasks.component'
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
-  { path: 'login', component: LoginComponent,canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent},
+  { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent},
+  { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ];
 
@@ -23,8 +23,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     IndexComponent,
-    ProfileComponent,
-    SignupComponent
+    SignupComponent,
+    OldtasksComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [Globals,AuthGuard],
+  providers: [Globals,AuthGuard,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

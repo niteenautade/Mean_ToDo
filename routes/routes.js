@@ -11,10 +11,16 @@ module.exports = function(app, passport,express,path) {
     
     app.get('/api/get/:userid',checkAuth, function(req, res){
         // get all the task
-        console.log("Checkkkkkkkkk req",req.method);
+        console.log("Today's Date:",new Date());
         console.log('/api/get/:userid =>',req.params.userid);
         var user = {};
-        user['id']=req.params.userid; //'id' refers to user ... '_id' refers to task id
+        user['id']=req.params.userid; //'id' refers to userid ... '_id' refers to task id
+        var start = new Date();
+        start.setHours(0,0,0,0);
+
+        var end = new Date();
+        end.setHours(23,59,59,999);
+        user['created_at']={$gte: start, $lt: end};
         Task.find(user, function(err, tasks) {
         if (err) throw err;
         res.send(tasks);
@@ -34,7 +40,7 @@ module.exports = function(app, passport,express,path) {
         
     });
     app.post('/api/toggle/',checkAuth, function(req, res){
-        // get all the task
+        // Toggle the status of a task
         var user = req.body; 
         console.log('From UI ++>', user);
         console.log('From PP ++>', req.user);
@@ -47,6 +53,7 @@ module.exports = function(app, passport,express,path) {
             console.log('Task Toggled!');
         });
     });
+    //Add New Task
     app.post('/api/add',checkAuth, function(req, res) {
        var task = req.body;
        console.log("Taskkkkk>>>>>>>",task);
@@ -177,3 +184,4 @@ function checkAuth(req, res, next){
     res.redirect('/logout');
     
 }
+

@@ -12,8 +12,16 @@
       <img src="loading.gif" alt="loading">
     </div>
 <ng-template #app>
-    <div>
-        <div class="app-container">
+    <div class=row>
+        <div class="col-md-3">
+            <div style="margin-top:10%;" class="text-center">
+                <a routerLink="/oldtasks" routerLinkActive="active" style="text-decoration:none;color:inherit;font-size:1.2em;font-weight:bold;">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>  Want to see old tasks?
+                </a>
+            </div>
+
+        </div>
+        <div class="col-md-6">
             <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
                 <input type="text" class="form-control" [(ngModel)]="modelTask" required minlength="1" maxlength="24" pattern="[a-zA-Z0-9\!\s\*\.\?]+" name="task" #task=ngModel>
                 <span class="input-group-btn">
@@ -53,6 +61,7 @@
                 </ul>
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
     
 </ng-template>

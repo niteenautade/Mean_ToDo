@@ -7,7 +7,8 @@ var taskSchema = new Schema({
     id: String,
     email: String,
     task: String,
-    done: Boolean
+    done: Boolean,
+    created_at: Date
 });
 
 // the schema is useless so far

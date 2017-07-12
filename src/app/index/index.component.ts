@@ -52,6 +52,7 @@ export class IndexComponent implements OnInit {
     task['done'] = false;
     task['email'] = this.globals.getEmail();
     task['id'] = this.globals.getId();
+    task['created_at'] = new Date()
     headers.append('Content-Type','application/json;charset=utf-8');
     console.log('yahoooooo',task);
     this.http.post('/api/add',task,headers).subscribe(
@@ -61,8 +62,7 @@ export class IndexComponent implements OnInit {
       err=> console.log(err)
     );
   }
-
-
+  
   taskDone(status){
     if(status==true){
       return 'line-through';
