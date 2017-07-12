@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { Globals } from './../global';
+import {SharedataService} from './../sharedata.service'
 @Component({
   selector: 'app-oldtasks',
   templateUrl: './oldtasks.component.html',
@@ -14,13 +15,15 @@ export class OldtasksComponent implements OnInit {
   tasks = [];
   error:string='';
   showLoading:boolean=false;
-  constructor(private globals: Globals,private router:Router,private http:Http) {
+  selectedDate : any;
+  constructor(private globals: Globals,private router:Router,private http:Http,private _sharedataservice:SharedataService) {
     if(this.globals.getEmail() )this.getTasks();
   }
-
-  ngOnInit() {
+  getDateFromService(){
+    this.selectedDate = this._sharedataservice.selectedDate;
+    console.log('OldtasksComponent',this._sharedataservice.selectedDate,typeof(this._sharedataservice.selectedDate));
   }
-
+  ngOnInit() {}
   
   getTasks(){
     this.showLoading = true;

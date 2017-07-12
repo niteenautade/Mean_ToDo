@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { OldtasksComponent } from './oldtasks/oldtasks.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { SharedataService } from './sharedata.service';
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule
   ],
-  providers: [Globals,AuthGuard,LoginGuard],
+  providers: [Globals,AuthGuard,LoginGuard,SharedataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

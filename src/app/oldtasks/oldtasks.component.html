@@ -1,8 +1,11 @@
 <div class=row>
     <div class="col-md-4">
-        <div class="text-center">
-            <app-datepicker></app-datepicker>
+        <div class="text-center" style="margin-top:10%">
+            <app-datepicker (click)="getDateFromService()"></app-datepicker>
         </div>
+        <p>
+            Selected Date : {{ selectedDate }}
+        </p>
     </div>
     <div class="col-md-6">
         <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
