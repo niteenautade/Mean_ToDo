@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent},
-  { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard] }, // , canActivate: [AuthGuard]
+  { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard]}, // , canActivate: [AuthGuard]
   { path: '**', redirectTo: ''}
 ];
 

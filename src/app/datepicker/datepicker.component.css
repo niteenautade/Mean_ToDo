@@ -1,0 +1,35 @@
+.tab{
+    display: table;
+    height: 35px;
+    overflow: hidden;
+}
+.tab-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.app-container{
+    width: 60%;
+    margin:0 auto;     
+}
+.input-group{
+    padding: 40px 0px 40px 0px;
+}
+li:nth-child(odd){
+    background-color : #F2F2F2;
+    
+}
+li:nth-child(even){
+    background-color : #FCFCFC;
+    
+}
+ul{
+    list-style: none;    
+}
+.taskHeader{
+    margin: 0 auto;
+    text-align:center;
+}
+ul{
+    padding-left: 0px;
+}

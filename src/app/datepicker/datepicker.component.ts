@@ -8,12 +8,10 @@ const now = new Date();
   styleUrls: ['./datepicker.component.css']
 })
 export class DatepickerComponent {
- model: NgbDateStruct;
-  date: {year: number, month: number};
-
-  selectToday() {
-    this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+  selectedDate : any;
+  dateChanged(model){
+    this.selectedDate = new Date(model.year,model.month-1,model.day);
   }
-  constructor() { }
-
+  constructor() { 
+  }
 }

@@ -5,9 +5,11 @@
                 </h2>
                 <div style="float:right;margin-right:20px;display:inline">
                         <span *ngIf="globals.getEmail()">Welcome, {{globals.getEmail()}}</span>
+                        
                         <button type="button" class="btn btn-large btn-secondary" (click)='logout()' *ngIf="globals.getEmail()">
-                                Logout
+                                <a>Logout</a>
                         </button>
+                        
                 </div>
         </div>
         

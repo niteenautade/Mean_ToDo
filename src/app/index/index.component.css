@@ -33,3 +33,6 @@ ul{
 ul{
     padding-left: 0px;
 }
+a:hover {
+ cursor:pointer;
+}
