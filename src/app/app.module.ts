@@ -9,12 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { AuthGuard,LoginGuard } from './authguard.service';
 import { SignupComponent } from './signup/signup.component';
-import { OldtasksComponent } from './oldtasks/oldtasks.component'
+import { OldtasksComponent } from './oldtasks/oldtasks.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent},
-  { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard]},
+  { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard] }, // , canActivate: [AuthGuard]
   { path: '**', redirectTo: ''}
 ];
 
@@ -24,9 +26,11 @@ const appRoutes: Routes = [
     LoginComponent,
     IndexComponent,
     SignupComponent,
+    DatepickerComponent,
     OldtasksComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,

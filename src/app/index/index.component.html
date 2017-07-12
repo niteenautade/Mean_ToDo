@@ -4,8 +4,8 @@
     <div class="jumbotron text-center">
         <h1><span class="fa fa-check"></span> To Do</h1>
         <p>Login or Register with:</p>
-        <a routerLink="/login" routerLinkActive="active" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-        <a routerLink="/signup" routerLinkActive="active" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
+        <a routerLink="/login" routerLinkActive="active" class="btn btn-secondary"><span class="fa fa-user"></span> Login</a>
+        <a routerLink="/signup" routerLinkActive="active" class="btn btn-secondary"><span class="fa fa-user"></span> Signup</a>
     </div>
 </div>
     <div *ngIf="showLoading" style="position:fixed;top:43%;left:50%">
@@ -25,7 +25,7 @@
             <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
                 <input type="text" class="form-control" [(ngModel)]="modelTask" required minlength="1" maxlength="24" pattern="[a-zA-Z0-9\!\s\*\.\?]+" name="task" #task=ngModel>
                 <span class="input-group-btn">
-                        <button class="btn btn-default" [disabled]="!taskForm.form.valid" type="submit">Add Task</button>
+                        <button class="btn btn-secondary" [disabled]="!taskForm.form.valid" type="submit">Add Task</button>
                 </span>
             </form>
                 <div *ngIf="task.errors && (task.dirty || task.touched)" class="alert alert-danger">
@@ -54,7 +54,7 @@
                             <a href="#" class="tab-cell" style="text-decoration: none;color: inherit;">{{task.task}}</a>
                         </div>
                         <div class="col-md-4 text-right">
-                            <button class="btn btn-default" (click)="deleteTask(task._id)" >Delete</button>
+                            <button class="btn btn-secondary" (click)="deleteTask(task._id)" >Delete</button>
                         </div>
 
                     </li>
