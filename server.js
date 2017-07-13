@@ -13,7 +13,7 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
-
+var MongoStore = require('connect-mongo')(session);
 var configDB = require('./config/database.js');
 
 // configuration ===============================================================
@@ -30,7 +30,9 @@ app.use(bodyParser()); // get information from html forms
 app.set('view engine', 'html'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch', cookie: { maxAge: 60*60*1000  } })); // session secret ...maxAge: 60000
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch',
+                  cookie: { maxAge: 20*60*1000  },  // session secret ...maxAge: 60000
+                  store: new MongoStore({ mongooseConnection: mongoose.connection }) }))
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
