@@ -734,7 +734,7 @@ exports = module.exports = __webpack_require__(17)(false);
 
 
 // module
-exports.push([module.i, "body,html{\r\n    margin: 0 auto;\r\n}\r\n.nav{\r\n    width:100%;background-color:crimson;color:white;\r\n    margin: 0 auto;\r\n\r\n}\r\n.nav-head{\r\n    padding: 10px 0px 10px 40px;\r\n    display: inline;\r\n}\r\n.nav-inner{\r\n    margin-top: 15px;\r\n    margin-bottom: 15px;\r\n}\r\na:hover{\r\n cursor:pointer;\r\n}", ""]);
+exports.push([module.i, "body,html{\r\n    margin: 0 auto;\r\n}\r\n.nav{\r\n    width:100%;background-color:crimson;color:white;\r\n    margin: 0 auto;\r\n\r\n}\r\n.nav-head{\r\n    padding: 10px 0px 10px 40px;\r\n    display: inline;\r\n}\r\n.nav-inner{\r\n    margin-top: 15px;\r\n    margin-bottom: 15px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -837,7 +837,7 @@ module.exports = module.exports.toString();
 /***/ 236:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"nav\">\r\n        <div class=\"nav-inner\" style=\"width:100%\">\r\n                <h2 class=\"nav-head\" style=\"display:inline\">\r\n                        <a routerLink=\"/\" routerLinkActive=\"active\" style=\"text-decoration:none; color:white;\">To-Do APP</a>\r\n                </h2>\r\n                <div style=\"float:right;margin-right:20px;display:inline\">\r\n                        <span *ngIf=\"globals.getEmail()\">Welcome, {{globals.getEmail()}}</span>\r\n                        \r\n                        <button type=\"button\" class=\"btn btn-large btn-secondary\" (click)='logout()' *ngIf=\"globals.getEmail()\">\r\n                                <a>Logout</a>\r\n                        </button>\r\n                        \r\n                </div>\r\n        </div>\r\n        \r\n</div>\r\n<router-outlet></router-outlet>"
+module.exports = "<div class=\"nav\">\r\n        <div class=\"nav-inner\" style=\"width:100%\">\r\n                <h2 class=\"nav-head\" style=\"display:inline\">\r\n                        <a routerLink=\"/\" routerLinkActive=\"active\" style=\"text-decoration:none; color:white;\">To-Do APP</a>\r\n                </h2>\r\n                <div style=\"float:right;margin-right:20px;display:inline\">\r\n                        <span *ngIf=\"globals.getEmail()\">Welcome, {{globals.getEmail()}}</span>\r\n                        \r\n                        <button type=\"button\" class=\"btn btn-large btn-secondary\" (click)='logout()' *ngIf=\"globals.getEmail()\" style=\"cursor:pointer;\">\r\n                                Logout\r\n                        </button>\r\n                        \r\n                </div>\r\n        </div>\r\n        \r\n</div>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
