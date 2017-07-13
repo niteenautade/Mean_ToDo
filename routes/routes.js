@@ -63,6 +63,22 @@ module.exports = function(app, passport,express,path) {
         console.log('Task added in Database!');
         });
    });
+
+   app.get('/api/get/:userid/:date',checkAuth, function(req, res){
+        // get all the tasks by date
+        console.log('/api/get/:userid =>',req.params.userid);
+        var user = {};
+        user['id']=req.params.userid; //'id' refers to userid ... '_id' refers to task id
+        var start = new Date(req.params.date);
+        start.setHours(0,0,0,0);
+        var end = new Date(req.params.date);
+        end.setHours(23,59,59,999);
+        user['created_at']={$gte: start, $lt: end};
+        Task.find(user, function(err, tasks) {
+            if (err) throw err;
+            res.send(tasks);
+        });
+    });
     /*app.get('/loggedIn', function(req, res) {
         if(req.user){
             res.redirect('app/index.html');

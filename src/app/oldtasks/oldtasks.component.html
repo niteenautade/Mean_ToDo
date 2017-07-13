@@ -3,12 +3,12 @@
         <div class="text-center" style="margin-top:10%">
             <app-datepicker (click)="getDateFromService()"></app-datepicker>
         </div>
-        <p>
+        <!--<p>
             Selected Date : {{ selectedDate }}
-        </p>
+        </p>-->
     </div>
     <div class="col-md-6">
-        <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
+        <!--<form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
             <input type="text" class="form-control" [(ngModel)]="modelTask" required minlength="1" maxlength="24" pattern="[a-zA-Z0-9\!\s\*\.\?]+" name="task" #task=ngModel>
             <span class="input-group-btn">
                     <button class="btn btn-secondary" [disabled]="!taskForm.form.valid" type="submit">Add Task</button>
@@ -27,10 +27,22 @@
                 <div [hidden]="!task.errors.pattern">
                 Task can contain only !, *, ., ?
                 </div>
+            </div>-->
+        <div *ngIf="dateToBePrinted==undefined else elseHeader" style="margin-top:3%">
+            <h3 class="taskHeader" style="text-align:center;" >Your Tasks</h3>
+            <p style="color:green;font-style: italic;text-align:center;">Please Select a Date</p>
+        </div>
+        <ng-template #elseHeader>
+            <div style="margin-top:3%">
+                <h3 class="taskHeader" style="text-align:center;">Your Tasks on {{ dateToBePrinted }}</h3>
+                <div *ngIf="tasks[0]!=null else elseP">
+                    <p style="text-align:center;">(Click on a Task if it is completed)</p>
+                </div>
             </div>
-        
-        <h3 class="taskHeader" style="text-align:center;">Your Tasks</h3>
-        <p style="text-align:center;">(Click on a Task if it is completed)</p>
+        </ng-template>
+                <ng-template #elseP>
+                    <p style="color:green;font-style: italic;text-align:center;">No Tasks for the day</p>
+                </ng-template>
         <p *ngIf="error!=''" style="color:red;font-style: italic;text-align:center;">{{error}}</p>
         <div>
             <ul>
@@ -39,9 +51,9 @@
                     <div class="col-md-4 text-center tab" [style.text-decoration]="taskDone(task.done)" (click)="toggleTask(task._id,task.done)">
                         <a class="tab-cell" style="text-decoration: none;color: inherit;">{{task.task}}</a>
                     </div>
-                    <div class="col-md-4 text-right">
+                    <!--<div class="col-md-4 text-right">
                         <button class="btn btn-secondary" (click)="deleteTask(task._id)" >Delete</button>
-                    </div>
+                    </div>-->
 
                 </li>
             </ul>

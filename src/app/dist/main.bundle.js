@@ -209,11 +209,11 @@ var AuthGuard = (function () {
     }
     AuthGuard.prototype.canActivate = function () {
         if (this.globals.getEmail()) {
-            console.log('User is authenticated. Opening route');
+            console.log('AuthGuard Service : User is authenticated. Opening route');
             return true;
         }
         else {
-            console.log('User is not authenticated. So route cannot be loaded');
+            console.log('AuthGuard Service : User is not authenticated. So route cannot be loaded');
             this.router.navigateByUrl('/');
         }
     };
@@ -231,11 +231,11 @@ var LoginGuard = (function () {
     }
     LoginGuard.prototype.canActivate = function () {
         if (!this.globals.getEmail()) {
-            console.log('User is not authenticated. Opening Login page');
+            console.log('LoginGuard Service : User is not authenticated. Opening Login page');
             return true;
         }
         else {
-            console.log('User is authenticated. So login page cannot be loaded');
+            console.log('LoginGuard Service : User is authenticated. So login page cannot be loaded');
             this.router.navigateByUrl('/');
         }
     };
@@ -518,42 +518,52 @@ var OldtasksComponent = (function () {
     OldtasksComponent.prototype.getDateFromService = function () {
         this.selectedDate = this._sharedataservice.selectedDate;
         console.log('OldtasksComponent', this._sharedataservice.selectedDate, typeof (this._sharedataservice.selectedDate));
+        this.dateToBePrinted = this.toStringPrintDate(this.selectedDate);
+        this.getTasks();
     };
     OldtasksComponent.prototype.ngOnInit = function () { };
     OldtasksComponent.prototype.getTasks = function () {
         var _this = this;
-        this.showLoading = true;
-        this.http.get('/api/get/' + this.globals.getId()).subscribe(function (res) {
-            setTimeout(function () {
-                _this.showLoading = false;
-                try {
-                    _this.tasks = res.json();
-                }
-                catch (e) {
-                    console.log('errrr', e);
-                    _this.error = ' Session Expired! Please Login Again! ';
-                    _this.router.navigateByUrl('/');
-                }
-            }, 200);
-        });
+        if (this.selectedDate != undefined) {
+            this.showLoading = true;
+            this.http.get('/api/get/' + this.globals.getId() + '/' + this.selectedDate.toString()).subscribe(function (res) {
+                setTimeout(function () {
+                    _this.showLoading = false;
+                    try {
+                        _this.tasks = res.json();
+                    }
+                    catch (e) {
+                        console.log('errrr', e);
+                        _this.error = ' Session Expired! Please Login Again! ';
+                        //this.router.navigateByUrl('/');
+                        _this.router.navigateByUrl('/');
+                    }
+                }, 200);
+            });
+        }
     };
-    OldtasksComponent.prototype.deleteTask = function (id) {
-        var _this = this;
-        this.http.get('/api/delete/' + this.globals.getId() + '/' + id).subscribe(function (res) { _this.getTasks(); }, function (err) { return console.log(err); });
-    };
-    OldtasksComponent.prototype.addTask = function (task) {
-        var _this = this;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
-        task['done'] = false;
-        task['email'] = this.globals.getEmail();
-        task['id'] = this.globals.getId();
-        task['created_at'] = new Date();
-        headers.append('Content-Type', 'application/json;charset=utf-8');
-        console.log('yahoooooo', task);
-        this.http.post('/api/add', task, headers).subscribe(function (res) {
-            _this.getTasks();
-        }, function (err) { return console.log(err); });
-    };
+    /*  deleteTask(id){
+        this.http.get('/api/delete/'+this.globals.getId()+'/'+id).subscribe(
+          (res)=>{this.getTasks();},
+          err=> console.log(err)
+        );
+      }*/
+    /*addTask(task){
+      var headers = new Headers();
+      task['done'] = false;
+      task['email'] = this.globals.getEmail();
+      task['id'] = this.globals.getId();
+      task['created_at'] = new Date()
+      headers.append('Content-Type','application/json;charset=utf-8');
+      console.log('yahoooooo',task);
+      this.http.post('/api/add',task,headers).subscribe(
+        (res)=>{
+          this.getTasks();
+        },
+        err=> console.log(err)
+      );
+    }
+    */
     OldtasksComponent.prototype.taskDone = function (status) {
         if (status == true) {
             return 'line-through';
@@ -571,6 +581,11 @@ var OldtasksComponent = (function () {
             _this.getTasks();
             console.log('toggleTask response index component', res);
         }, function (err) { return console.log(err); });
+    };
+    OldtasksComponent.prototype.toStringPrintDate = function (date) {
+        var stringArray = date.toString().split(' ');
+        var newDate = stringArray[2] + '-' + stringArray[1] + '-' + stringArray[3];
+        return newDate;
     };
     return OldtasksComponent;
 }());
@@ -836,7 +851,7 @@ module.exports = "\r\n<ngb-datepicker #dp [(ngModel)]=\"model\" (navigate)=\"dat
 /***/ 238:
 /***/ (function(module, exports) {
 
-module.exports = "<title>To Do</title>\r\n\r\n<div class=\"container\" *ngIf=\"!globals.getEmail();else app\">\r\n    <div class=\"jumbotron text-center\">\r\n        <h1><span class=\"fa fa-check\"></span> To Do</h1>\r\n        <p>Login or Register with:</p>\r\n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-secondary\"><span class=\"fa fa-user\"></span> Login</a>\r\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-secondary\"><span class=\"fa fa-user\"></span> Signup</a>\r\n    </div>\r\n</div>\r\n    <div *ngIf=\"showLoading\" style=\"position:fixed;top:43%;left:50%\">\r\n      <img src=\"loading.gif\" alt=\"loading\">\r\n    </div>\r\n<ng-template #app>\r\n    <div class=row>\r\n        <div class=\"col-md-3\">\r\n            <div style=\"margin-top:10%;\" class=\"text-center\">\r\n                <a routerLink=\"/oldtasks\" routerLinkActive=\"active\" style=\"text-decoration:none;color:inherit;font-size:1.2em;font-weight:bold;\">\r\n                    <i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>  Want to see old tasks?\r\n                </a>\r\n            </div>\r\n\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <form class=\"input-group\" (ngSubmit)=\"addTask(taskForm.value)\" #taskForm=\"ngForm\" style=\"text-align:center;\">\r\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"modelTask\" required minlength=\"1\" maxlength=\"24\" pattern=\"[a-zA-Z0-9\\!\\s\\*\\.\\?]+\" name=\"task\" #task=ngModel>\r\n                <span class=\"input-group-btn\">\r\n                        <button class=\"btn btn-secondary\" [disabled]=\"!taskForm.form.valid\" type=\"submit\">Add Task</button>\r\n                </span>\r\n            </form>\r\n                <div *ngIf=\"task.errors && (task.dirty || task.touched)\" class=\"alert alert-danger\">\r\n                    <div [hidden]=\"!task.errors.required\">\r\n                    Task is required\r\n                    </div>\r\n                    <div [hidden]=\"!task.errors.minlength\">\r\n                    Task must be at least 1 characters long.\r\n                    </div>\r\n                    <div [hidden]=\"!task.errors.maxlength\">\r\n                    Task cannot be more than 24 characters long.\r\n                    </div>\r\n                    <div [hidden]=\"!task.errors.pattern\">\r\n                    Task can contain only !, *, ., ?\r\n                    </div>\r\n                </div>\r\n            \r\n            <h3 class=\"taskHeader\" style=\"text-align:center;\">Your Tasks</h3>\r\n            <p style=\"text-align:center;\">(Click on a Task if it is completed)</p>\r\n            <p *ngIf=\"error!=''\" style=\"color:red;font-style: italic;text-align:center;\">{{error}}</p>\r\n            <div>\r\n                <ul>\r\n                    <li *ngFor='let task of tasks' class=\"row\">\r\n                        <div class=\"col-md-4\"></div>\r\n                        <div class=\"col-md-4 text-center tab\" [style.text-decoration]=\"taskDone(task.done)\" (click)=\"toggleTask(task._id,task.done)\">\r\n                            <a class=\"tab-cell\" style=\"text-decoration: none;color: inherit;\">{{task.task}}</a>\r\n                        </div>\r\n                        <div class=\"col-md-4 text-right\">\r\n                            <button class=\"btn btn-secondary\" (click)=\"deleteTask(task._id)\" >Delete</button>\r\n                        </div>\r\n\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-3\"></div>\r\n    </div>\r\n    \r\n</ng-template>\r\n\r\n"
+module.exports = "<title>To Do</title>\r\n\r\n<div class=\"container\" *ngIf=\"!globals.getEmail();else app\">\r\n    <div class=\"jumbotron text-center\">\r\n        <h1><span class=\"fa fa-check\"></span> To Do</h1>\r\n        <p>Login or Register with:</p>\r\n        <a routerLink=\"/login\" routerLinkActive=\"active\" class=\"btn btn-secondary\"><span class=\"fa fa-user\"></span> Login</a>\r\n        <a routerLink=\"/signup\" routerLinkActive=\"active\" class=\"btn btn-secondary\"><span class=\"fa fa-user\"></span> Signup</a>\r\n    </div>\r\n</div>\r\n    <div *ngIf=\"showLoading\" style=\"position:fixed;top:43%;left:50%\">\r\n      <img src=\"loading.gif\" alt=\"loading\">\r\n    </div>\r\n<ng-template #app>\r\n    <div class=row>\r\n        <div class=\"col-md-3\">\r\n            <div style=\"margin-top:10%;\" class=\"text-center\">\r\n                <a routerLink=\"/oldtasks\" routerLinkActive=\"active\" style=\"text-decoration:none;color:inherit;font-size:1.2em;font-weight:bold;\">\r\n                    <i class=\"fa fa-calendar\" aria-hidden=\"true\"></i>  Want to see old tasks?\r\n                </a>\r\n            </div>\r\n\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <form class=\"input-group\" (ngSubmit)=\"addTask(taskForm.value)\" #taskForm=\"ngForm\" style=\"text-align:center;\">\r\n                <input type=\"text\" class=\"form-control\" [(ngModel)]=\"modelTask\" required minlength=\"1\" maxlength=\"24\" pattern=\"[a-zA-Z0-9\\!\\s\\*\\.\\?]+\" name=\"task\" #task=ngModel>\r\n                <span class=\"input-group-btn\">\r\n                        <button class=\"btn btn-secondary\" [disabled]=\"!taskForm.form.valid\" type=\"submit\" style=\"cursor:pointer\">Add Task</button>\r\n                </span>\r\n            </form>\r\n                <div *ngIf=\"task.errors && (task.dirty || task.touched)\" class=\"alert alert-danger\">\r\n                    <div [hidden]=\"!task.errors.required\">\r\n                    Task is required\r\n                    </div>\r\n                    <div [hidden]=\"!task.errors.minlength\">\r\n                    Task must be at least 1 characters long.\r\n                    </div>\r\n                    <div [hidden]=\"!task.errors.maxlength\">\r\n                    Task cannot be more than 24 characters long.\r\n                    </div>\r\n                    <div [hidden]=\"!task.errors.pattern\">\r\n                    Task can contain only !, *, ., ?\r\n                    </div>\r\n                </div>\r\n            \r\n            \r\n            <div *ngIf=\"tasks[0]!=null else elseHeader\">\r\n                <h3 class=\"taskHeader\" style=\"text-align:center;\">Your Tasks</h3>\r\n                <p style=\"text-align:center;\">(Click on a Task if it is completed)</p>\r\n            </div>\r\n            <ng-template #elseHeader>\r\n                <h3 class=\"taskHeader\" style=\"text-align:center;\">Your Tasks</h3>\r\n                <p style=\"color:green;font-style: italic;text-align:center;\">No Tasks for Today</p>\r\n            </ng-template>\r\n            <p *ngIf=\"error!=''\" style=\"color:red;font-style: italic;text-align:center;\">{{error}}</p>\r\n            <div>\r\n                <ul>\r\n                    <li *ngFor='let task of tasks' class=\"row\">\r\n                        <div class=\"col-md-4\"></div>\r\n                        <div class=\"col-md-4 text-center tab\" [style.text-decoration]=\"taskDone(task.done)\" (click)=\"toggleTask(task._id,task.done)\">\r\n                            <a class=\"tab-cell\" style=\"text-decoration: none;color: inherit;\">{{task.task}}</a>\r\n                        </div>\r\n                        <div class=\"col-md-4 text-right\">\r\n                            <button class=\"btn btn-secondary\" (click)=\"deleteTask(task._id)\" style=\"cursor:pointer\">Delete</button>\r\n                        </div>\r\n\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-3\"></div>\r\n    </div>\r\n    \r\n</ng-template>\r\n\r\n"
 
 /***/ }),
 
@@ -850,7 +865,7 @@ module.exports = "<!-- views/login.ejs -->\r\n<!doctype html>\r\n<html>\r\n<head
 /***/ 240:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=row>\r\n    <div class=\"col-md-4\">\r\n        <div class=\"text-center\" style=\"margin-top:10%\">\r\n            <app-datepicker (click)=\"getDateFromService()\"></app-datepicker>\r\n        </div>\r\n        <p>\r\n            Selected Date : {{ selectedDate }}\r\n        </p>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n        <form class=\"input-group\" (ngSubmit)=\"addTask(taskForm.value)\" #taskForm=\"ngForm\" style=\"text-align:center;\">\r\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"modelTask\" required minlength=\"1\" maxlength=\"24\" pattern=\"[a-zA-Z0-9\\!\\s\\*\\.\\?]+\" name=\"task\" #task=ngModel>\r\n            <span class=\"input-group-btn\">\r\n                    <button class=\"btn btn-secondary\" [disabled]=\"!taskForm.form.valid\" type=\"submit\">Add Task</button>\r\n            </span>\r\n        </form>\r\n            <div *ngIf=\"task.errors && (task.dirty || task.touched)\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!task.errors.required\">\r\n                Task is required\r\n                </div>\r\n                <div [hidden]=\"!task.errors.minlength\">\r\n                Task must be at least 1 characters long.\r\n                </div>\r\n                <div [hidden]=\"!task.errors.maxlength\">\r\n                Task cannot be more than 24 characters long.\r\n                </div>\r\n                <div [hidden]=\"!task.errors.pattern\">\r\n                Task can contain only !, *, ., ?\r\n                </div>\r\n            </div>\r\n        \r\n        <h3 class=\"taskHeader\" style=\"text-align:center;\">Your Tasks</h3>\r\n        <p style=\"text-align:center;\">(Click on a Task if it is completed)</p>\r\n        <p *ngIf=\"error!=''\" style=\"color:red;font-style: italic;text-align:center;\">{{error}}</p>\r\n        <div>\r\n            <ul>\r\n                <li *ngFor='let task of tasks' class=\"row\">\r\n                    <div class=\"col-md-4\"></div>\r\n                    <div class=\"col-md-4 text-center tab\" [style.text-decoration]=\"taskDone(task.done)\" (click)=\"toggleTask(task._id,task.done)\">\r\n                        <a class=\"tab-cell\" style=\"text-decoration: none;color: inherit;\">{{task.task}}</a>\r\n                    </div>\r\n                    <div class=\"col-md-4 text-right\">\r\n                        <button class=\"btn btn-secondary\" (click)=\"deleteTask(task._id)\" >Delete</button>\r\n                    </div>\r\n\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    <!--<div class=\"col-md-6\">\r\n        haha\r\n    </div>-->\r\n    <div class=\"col-md-2\"></div>\r\n</div>\r\n<div *ngIf=\"showLoading\" style=\"position:fixed;top:43%;left:50%\">\r\n      <img src=\"loading.gif\" alt=\"loading\">\r\n</div>  \r\n\r\n\r\n"
+module.exports = "<div class=row>\r\n    <div class=\"col-md-4\">\r\n        <div class=\"text-center\" style=\"margin-top:10%\">\r\n            <app-datepicker (click)=\"getDateFromService()\"></app-datepicker>\r\n        </div>\r\n        <!--<p>\r\n            Selected Date : {{ selectedDate }}\r\n        </p>-->\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n        <!--<form class=\"input-group\" (ngSubmit)=\"addTask(taskForm.value)\" #taskForm=\"ngForm\" style=\"text-align:center;\">\r\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"modelTask\" required minlength=\"1\" maxlength=\"24\" pattern=\"[a-zA-Z0-9\\!\\s\\*\\.\\?]+\" name=\"task\" #task=ngModel>\r\n            <span class=\"input-group-btn\">\r\n                    <button class=\"btn btn-secondary\" [disabled]=\"!taskForm.form.valid\" type=\"submit\">Add Task</button>\r\n            </span>\r\n        </form>\r\n            <div *ngIf=\"task.errors && (task.dirty || task.touched)\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!task.errors.required\">\r\n                Task is required\r\n                </div>\r\n                <div [hidden]=\"!task.errors.minlength\">\r\n                Task must be at least 1 characters long.\r\n                </div>\r\n                <div [hidden]=\"!task.errors.maxlength\">\r\n                Task cannot be more than 24 characters long.\r\n                </div>\r\n                <div [hidden]=\"!task.errors.pattern\">\r\n                Task can contain only !, *, ., ?\r\n                </div>\r\n            </div>-->\r\n        <div *ngIf=\"dateToBePrinted==undefined else elseHeader\" style=\"margin-top:3%\">\r\n            <h3 class=\"taskHeader\" style=\"text-align:center;\" >Your Tasks</h3>\r\n            <p style=\"color:green;font-style: italic;text-align:center;\">Please Select a Date</p>\r\n        </div>\r\n        <ng-template #elseHeader>\r\n            <div style=\"margin-top:3%\">\r\n                <h3 class=\"taskHeader\" style=\"text-align:center;\">Your Tasks on {{ dateToBePrinted }}</h3>\r\n                <div *ngIf=\"tasks[0]!=null else elseP\">\r\n                    <p style=\"text-align:center;\">(Click on a Task if it is completed)</p>\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n                <ng-template #elseP>\r\n                    <p style=\"color:green;font-style: italic;text-align:center;\">No Tasks for the day</p>\r\n                </ng-template>\r\n        <p *ngIf=\"error!=''\" style=\"color:red;font-style: italic;text-align:center;\">{{error}}</p>\r\n        <div>\r\n            <ul>\r\n                <li *ngFor='let task of tasks' class=\"row\">\r\n                    <div class=\"col-md-4\"></div>\r\n                    <div class=\"col-md-4 text-center tab\" [style.text-decoration]=\"taskDone(task.done)\" (click)=\"toggleTask(task._id,task.done)\">\r\n                        <a class=\"tab-cell\" style=\"text-decoration: none;color: inherit;\">{{task.task}}</a>\r\n                    </div>\r\n                    <!--<div class=\"col-md-4 text-right\">\r\n                        <button class=\"btn btn-secondary\" (click)=\"deleteTask(task._id)\" >Delete</button>\r\n                    </div>-->\r\n\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    <!--<div class=\"col-md-6\">\r\n        haha\r\n    </div>-->\r\n    <div class=\"col-md-2\"></div>\r\n</div>\r\n<div *ngIf=\"showLoading\" style=\"position:fixed;top:43%;left:50%\">\r\n      <img src=\"loading.gif\" alt=\"loading\">\r\n</div>  \r\n\r\n\r\n"
 
 /***/ }),
 

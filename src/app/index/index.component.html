@@ -25,7 +25,7 @@
             <form class="input-group" (ngSubmit)="addTask(taskForm.value)" #taskForm="ngForm" style="text-align:center;">
                 <input type="text" class="form-control" [(ngModel)]="modelTask" required minlength="1" maxlength="24" pattern="[a-zA-Z0-9\!\s\*\.\?]+" name="task" #task=ngModel>
                 <span class="input-group-btn">
-                        <button class="btn btn-secondary" [disabled]="!taskForm.form.valid" type="submit">Add Task</button>
+                        <button class="btn btn-secondary" [disabled]="!taskForm.form.valid" type="submit" style="cursor:pointer">Add Task</button>
                 </span>
             </form>
                 <div *ngIf="task.errors && (task.dirty || task.touched)" class="alert alert-danger">
@@ -43,8 +43,15 @@
                     </div>
                 </div>
             
-            <h3 class="taskHeader" style="text-align:center;">Your Tasks</h3>
-            <p style="text-align:center;">(Click on a Task if it is completed)</p>
+            
+            <div *ngIf="tasks[0]!=null else elseHeader">
+                <h3 class="taskHeader" style="text-align:center;">Your Tasks</h3>
+                <p style="text-align:center;">(Click on a Task if it is completed)</p>
+            </div>
+            <ng-template #elseHeader>
+                <h3 class="taskHeader" style="text-align:center;">Your Tasks</h3>
+                <p style="color:green;font-style: italic;text-align:center;">No Tasks for Today</p>
+            </ng-template>
             <p *ngIf="error!=''" style="color:red;font-style: italic;text-align:center;">{{error}}</p>
             <div>
                 <ul>
@@ -54,7 +61,7 @@
                             <a class="tab-cell" style="text-decoration: none;color: inherit;">{{task.task}}</a>
                         </div>
                         <div class="col-md-4 text-right">
-                            <button class="btn btn-secondary" (click)="deleteTask(task._id)" >Delete</button>
+                            <button class="btn btn-secondary" (click)="deleteTask(task._id)" style="cursor:pointer">Delete</button>
                         </div>
 
                     </li>

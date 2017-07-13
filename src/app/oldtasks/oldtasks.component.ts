@@ -16,42 +16,45 @@ export class OldtasksComponent implements OnInit {
   error:string='';
   showLoading:boolean=false;
   selectedDate : any;
+  dateToBePrinted : string;
   constructor(private globals: Globals,private router:Router,private http:Http,private _sharedataservice:SharedataService) {
     if(this.globals.getEmail() )this.getTasks();
   }
   getDateFromService(){
     this.selectedDate = this._sharedataservice.selectedDate;
     console.log('OldtasksComponent',this._sharedataservice.selectedDate,typeof(this._sharedataservice.selectedDate));
+    this.dateToBePrinted = this.toStringPrintDate(this.selectedDate);
+    this.getTasks();
   }
   ngOnInit() {}
   
   getTasks(){
-    this.showLoading = true;
-    this.http.get('/api/get/'+this.globals.getId()).subscribe(res=>{
-      setTimeout(()=>{
-        this.showLoading = false;
-        try{
-          this.tasks = res.json();
-        }
-        catch(e){
-          console.log('errrr',e);
-          this.error = ' Session Expired! Please Login Again! ';
-          this.router.navigateByUrl('/');
-        }
-      },200);
+    if(this.selectedDate!=undefined){
+      this.showLoading = true;
+      this.http.get('/api/get/'+this.globals.getId()+'/'+this.selectedDate.toString()).subscribe(res=>{
+        setTimeout(()=>{
+          this.showLoading = false;
+          try{
+            this.tasks = res.json();
+          }
+          catch(e){
+            console.log('errrr',e);
+            this.error = ' Session Expired! Please Login Again! ';
+            //this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/');
+          }
+        },200);
+      });
     }
-    );
-    
   }
 
-  deleteTask(id){
+/*  deleteTask(id){
     this.http.get('/api/delete/'+this.globals.getId()+'/'+id).subscribe(
       (res)=>{this.getTasks();},
       err=> console.log(err)
     );
-    
-  }
-  addTask(task){
+  }*/
+  /*addTask(task){
     var headers = new Headers();
     task['done'] = false;
     task['email'] = this.globals.getEmail();
@@ -66,7 +69,7 @@ export class OldtasksComponent implements OnInit {
       err=> console.log(err)
     );
   }
-  
+  */
   taskDone(status){
     if(status==true){
       return 'line-through';
@@ -86,6 +89,12 @@ export class OldtasksComponent implements OnInit {
       err=> console.log(err)
     );
     
+  }
+
+  toStringPrintDate(date){
+    var stringArray = date.toString().split(' ');
+    var newDate = stringArray[2]+'-'+stringArray[1]+'-'+stringArray[3];
+    return newDate;
   }
 
 }
