@@ -15,7 +15,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var configDB = require('./config/database.js');
-
+var nodemailer = require('./config/nodemailer')
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -39,8 +39,9 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 app.use('/', express.static(path.join(__dirname, '/src/app/dist')));
-require('./routes/routes.js')(app, passport,express,path); // load our routes and pass in our app and fully configured passport
+require('./routes/routes.js')(app, passport,express,path,nodemailer); // load our routes and pass in our app and fully configured passport
 console.log('Buss',path.join(__dirname, '/src/app/dist/index.html'));
+
 
 // launch ======================================================================
 app.listen(port);

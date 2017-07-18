@@ -1,0 +1,25 @@
+const nodemailer = require('nodemailer');
+const nodemailerconfig = require('./nodemailerconfig.json');
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: nodemailerconfig
+})
+
+var mailOptions = {
+    from: 'Tester Taskman <testertaskman@gmail.com>',
+    to: 'niteenautade@gmail.com',
+    subject: 'Signup Successful',
+    text: 'Hello World Success!!'
+}
+
+module.exports.mailit = function(){
+    transporter.sendMail(mailOptions, function (err, res) {
+        if(err){
+            console.log('Error',err);
+        } else {
+            console.log('Email Sent');
+        }
+    })
+
+}
+
