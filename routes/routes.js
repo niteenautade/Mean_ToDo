@@ -1,6 +1,6 @@
 // app/routes.js
 var Task = require('./../models/tasks');
-module.exports = function(app, passport,express,path,nodemailer) {
+module.exports = function(app, passport,express,path,nodemailerConfig,twilioConfig) {
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -124,7 +124,8 @@ module.exports = function(app, passport,express,path,nodemailer) {
     });*/
     app.get('/signup-success', function(req, res) {
         console.log('Sign up Successful');
-        nodemailer.mailit();
+        nodemailerConfig.mailit();
+        twilioConfig.sendSmsSignupSuccess();
         // render the page and pass in any flash data if it exists
         res.json(req.user);
         

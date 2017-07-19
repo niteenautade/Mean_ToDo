@@ -15,7 +15,9 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var configDB = require('./config/database.js');
-var nodemailer = require('./config/nodemailer')
+var nodemailerConfig = require('./config/nodemailerConfig');
+var twilioConfig = require('./config/twilioConfig');
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -37,9 +39,11 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+//twilioConfig.sendSmsSignupSuccess();
+//nodemailerConfig.mailit();
 // routes ======================================================================
 app.use('/', express.static(path.join(__dirname, '/src/app/dist')));
-require('./routes/routes.js')(app, passport,express,path,nodemailer); // load our routes and pass in our app and fully configured passport
+require('./routes/routes.js')(app, passport,express,path,nodemailerConfig,twilioConfig); // load our routes and pass in our app and fully configured passport
 console.log('Buss',path.join(__dirname, '/src/app/dist/index.html'));
 
 // launch ======================================================================
