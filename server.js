@@ -42,7 +42,6 @@ app.use('/', express.static(path.join(__dirname, '/src/app/dist')));
 require('./routes/routes.js')(app, passport,express,path,nodemailer); // load our routes and pass in our app and fully configured passport
 console.log('Buss',path.join(__dirname, '/src/app/dist/index.html'));
 
-
 // launch ======================================================================
 app.listen(port);
 console.log('The magic happens on port ' + port);
