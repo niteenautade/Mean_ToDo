@@ -610,8 +610,8 @@ var _a, _b, _c, _d;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return countries; });
 var countries = [
     { id: null, name: "Please Choose Your Country" },
-    { id: 91, name: "(+91) India" },
-    { id: 1, name: "(+1) USA" }
+    { id: '+91', name: "(+91) India" },
+    { id: '+1', name: "(+1) USA" }
 ];
 //# sourceMappingURL=countries.js.map
 
@@ -656,6 +656,7 @@ var SignupComponent = (function () {
     };
     SignupComponent.prototype.onSubmit = function (user) {
         var _this = this;
+        console.log('User', user);
         this.http.post('/signup', user).subscribe(function (res) {
             console.log('Sign up response:', res);
             var user = res.json();
@@ -890,7 +891,7 @@ module.exports = "<div class=row>\r\n    <div class=\"col-md-4\">\r\n        <di
 /***/ 242:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n\r\n<div class=\"col-sm-6 col-sm-offset-3\">\r\n\r\n    <h1><span class=\"fa fa-sign-in\"></span> Signup</h1>\r\n\r\n    <!-- LOGIN FORM -->\r\n    <form (ngSubmit)=\"onSubmit(signupForm.value)\" #signupForm=\"ngForm\">\r\n        <div class=\"form-group\">\r\n            <label>Email</label>\r\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label>Contact</label>\r\n            <select [(ngModel)]=\"countryCode\" class=\"form-control\" name=\"countryCode\" id=\"\" style=\"margin-bottom:1em;\">\r\n                <option *ngFor=\"let c of countries\" [ngValue]=\"c.id\">{{c.name}}</option>\r\n            </select>\r\n            <p>You chose: {{countryCode}}</p>\r\n            <input type=\"contactNumber\" class=\"form-control\" [(ngModel)]=\"contactNumber\" name=\"contactNumber\" placeholder=\"Enter Mobile Number\">\r\n        </div>\r\n\r\n\r\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\" style=\"cursor:pointer;\">Signup</button>\r\n    </form>\r\n\r\n    <hr>\r\n\r\n    <p>Already have an account? <a href=\"/login\">Login</a></p>\r\n    <p>Or go <a href=\"/\">home</a>.</p>\r\n\r\n</div>\r\n\r\n</div>"
+module.exports = "<div class=\"container\">\r\n\r\n<div class=\"col-sm-6 col-sm-offset-3\">\r\n\r\n    <h1><span class=\"fa fa-sign-in\"></span> Signup</h1>\r\n\r\n    <!-- LOGIN FORM -->\r\n    <form (ngSubmit)=\"onSubmit(signupForm.value)\" #signupForm=\"ngForm\">\r\n        <div class=\"form-group\">\r\n            <label>Email</label>\r\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"email\" name=\"email\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label>Password</label>\r\n            <input type=\"password\" class=\"form-control\" [(ngModel)]=\"password\" name=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label>Contact</label>\r\n            <select [(ngModel)]=\"countryCode\" class=\"form-control\" #countryCodeV=\"ngModel\" name=\"countryCode\" id=\"countryCode\" style=\"margin-bottom:1em;\">\r\n                <option *ngFor=\"let c of countries\" [ngValue]=\"c.id\">{{c.name}}</option>\r\n            </select>\r\n            <div *ngIf=\"countryCodeV.touched\">\r\n                <div [hidden]=\"countryCode!=null\" class=\"alert alert-danger\">\r\n                Country Code is required\r\n                </div>\r\n            </div>\r\n            <p>Touched : {{countryCodeV.touched}}</p>\r\n            <p>You chose: {{contactNumber}}</p>\r\n            <input pattern=\"[0-9]*\" required minlength=\"10\" maxlength=\"10\" class=\"form-control\" [(ngModel)]=\"contactNumber\" name=\"contactNumber\" id=\"contactNumber\" #contactNumberV=\"ngModel\" placeholder=\"Enter Mobile Number\">\r\n            <div *ngIf=\"contactNumberV.errors && (contactNumberV.dirty || contactNumberV.touched)\" class=\"alert alert-danger\">\r\n                <div [hidden]=\"!contactNumberV.errors.required\">\r\n                Contact Number is required\r\n                </div>\r\n                <div [hidden]=\"!contactNumberV.errors.minlength\">\r\n                Contact Number must be 10 digits long.\r\n                </div>\r\n                <div [hidden]=\"!contactNumberV.errors.maxlength\">\r\n                Contact Number must be 10 digits long.\r\n                </div>\r\n                <div [hidden]=\"!contactNumberV.errors.pattern\">\r\n                Contact Number must contain only digits\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <button type=\"submit\" class=\"btn btn-warning btn-lg\" [disabled]=\"!signupForm.form.valid\"  style=\"cursor:pointer;\">Signup</button>\r\n    </form>\r\n\r\n    <hr>\r\n\r\n    <p>Already have an account? <a href=\"/login\">Login</a></p>\r\n    <p>Or go <a href=\"/\">home</a>.</p>\r\n\r\n</div>\r\n\r\n</div>"
 
 /***/ }),
 

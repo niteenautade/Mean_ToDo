@@ -125,14 +125,12 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
     app.get('/signup-success', function(req, res) {
         console.log('Sign up Successful');
         nodemailerConfig.mailit();
-        twilioConfig.sendSmsSignupSuccess();
-        // render the page and pass in any flash data if it exists
+        //twilioConfig.sendSmsSignupSuccess();
         res.json(req.user);
         
     });
     app.get('/signup-failed', function(req, res) {
         //console.log('reqss:',req);
-        // render the page and pass in any flash data if it exists
         console.log('Console : Sign up Failed');
         res.send('Sign up Failed');
     });

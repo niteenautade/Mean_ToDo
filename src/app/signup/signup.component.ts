@@ -12,16 +12,15 @@ import { countries } from './countries';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private globals: Globals,private router:Router,private http:Http) {
-    
-   }
-    
+  constructor(private globals: Globals,private router:Router,private http:Http) {}
+  contactNumber : any;
   countries = countries;
   countryCode = this.countries[0]['id'];
-
+  
   ngOnInit() {
   }
   onSubmit(user){
+    console.log('User',user);
     this.http.post('/signup',user).subscribe(
       (res)=>{
         console.log('Sign up response:',res);

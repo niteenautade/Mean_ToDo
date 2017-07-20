@@ -16,15 +16,35 @@
         </div>
         <div class="form-group">
             <label>Contact</label>
-            <select [(ngModel)]="countryCode" class="form-control" name="countryCode" id="" style="margin-bottom:1em;">
+            <select [(ngModel)]="countryCode" class="form-control" #countryCodeV="ngModel" name="countryCode" id="countryCode" style="margin-bottom:1em;">
                 <option *ngFor="let c of countries" [ngValue]="c.id">{{c.name}}</option>
             </select>
-            <p>You chose: {{countryCode}}</p>
-            <input type="contactNumber" class="form-control" [(ngModel)]="contactNumber" name="contactNumber" placeholder="Enter Mobile Number">
+            <div *ngIf="countryCodeV.touched">
+                <div [hidden]="countryCode!=null" class="alert alert-danger">
+                Country Code is required
+                </div>
+            </div>
+            <p>Touched : {{countryCodeV.touched}}</p>
+            <p>You chose: {{contactNumber}}</p>
+            <input pattern="[0-9]*" required minlength="10" maxlength="10" class="form-control" [(ngModel)]="contactNumber" name="contactNumber" id="contactNumber" #contactNumberV="ngModel" placeholder="Enter Mobile Number">
+            <div *ngIf="contactNumberV.errors && (contactNumberV.dirty || contactNumberV.touched)" class="alert alert-danger">
+                <div [hidden]="!contactNumberV.errors.required">
+                Contact Number is required
+                </div>
+                <div [hidden]="!contactNumberV.errors.minlength">
+                Contact Number must be 10 digits long.
+                </div>
+                <div [hidden]="!contactNumberV.errors.maxlength">
+                Contact Number must be 10 digits long.
+                </div>
+                <div [hidden]="!contactNumberV.errors.pattern">
+                Contact Number must contain only digits
+                </div>
+            </div>
         </div>
 
 
-        <button type="submit" class="btn btn-warning btn-lg" style="cursor:pointer;">Signup</button>
+        <button type="submit" class="btn btn-warning btn-lg" [disabled]="!signupForm.form.valid"  style="cursor:pointer;">Signup</button>
     </form>
 
     <hr>
