@@ -3,7 +3,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { Globals } from './../global';
-
+import { countries } from './countries';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +12,12 @@ import { Globals } from './../global';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private globals: Globals,private router:Router,private http:Http) { }
+  constructor(private globals: Globals,private router:Router,private http:Http) {
+    
+   }
+    
+  countries = countries;
+  countryCode = this.countries[0]['id'];
 
   ngOnInit() {
   }

@@ -14,8 +14,17 @@
             <label>Password</label>
             <input type="password" class="form-control" [(ngModel)]="password" name="password">
         </div>
+        <div class="form-group">
+            <label>Contact</label>
+            <select [(ngModel)]="countryCode" class="form-control" name="countryCode" id="" style="margin-bottom:1em;">
+                <option *ngFor="let c of countries" [ngValue]="c.id">{{c.name}}</option>
+            </select>
+            <p>You chose: {{countryCode}}</p>
+            <input type="contactNumber" class="form-control" [(ngModel)]="contactNumber" name="contactNumber" placeholder="Enter Mobile Number">
+        </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+
+        <button type="submit" class="btn btn-warning btn-lg" style="cursor:pointer;">Signup</button>
     </form>
 
     <hr>
