@@ -24,8 +24,7 @@
                 Country Code is required
                 </div>
             </div>
-            <p>Touched : {{countryCodeV.touched}}</p>
-            <p>You chose: {{contactNumber}}</p>
+            
             <input pattern="[0-9]*" required minlength="10" maxlength="10" class="form-control" [(ngModel)]="contactNumber" name="contactNumber" id="contactNumber" #contactNumberV="ngModel" placeholder="Enter Mobile Number">
             <div *ngIf="contactNumberV.errors && (contactNumberV.dirty || contactNumberV.touched)" class="alert alert-danger">
                 <div [hidden]="!contactNumberV.errors.required">

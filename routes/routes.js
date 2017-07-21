@@ -123,9 +123,10 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
         res.render('signup.ejs', { message: req.flash('signupMessage') });
     });*/
     app.get('/signup-success', function(req, res) {
-        console.log('Sign up Successful');
-        nodemailerConfig.mailit();
-        //twilioConfig.sendSmsSignupSuccess();
+        console.log('Sign up Successful',req.user.local.email);
+        nodemailerConfig.mailit(req.user.local.email);
+        contactNo = req.user.local.countryCode + req.user.local.contactNumber;
+        twilioConfig.sendSmsSignupSuccess(contactNo);
         res.json(req.user);
         
     });
