@@ -160,8 +160,9 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
     // LOGOUT ==============================
     // =====================================
     app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
+         req.session.destroy(function (err) {
+            res.redirect('/'); 
+        });
     });
     
     
