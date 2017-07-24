@@ -10,7 +10,7 @@ import { Globals } from './global';
 })
 export class AppComponent {
   title = 'app works!';
-  constructor(private router:Router,private http : Http,private globals: Globals) {
+  constructor(private router:Router,private http : Http,public globals: Globals) {
       console.log("Hello World");
       this.http.get('/authenticated').subscribe(
         (res)=>{

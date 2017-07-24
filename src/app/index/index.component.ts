@@ -13,7 +13,7 @@ export class IndexComponent implements OnInit {
   tasks = [];
   error:string='';
   showLoading:boolean=false;
-  constructor(private globals: Globals,private router:Router,private http:Http) {
+  constructor(public globals: Globals,private router:Router,private http:Http) {
     if(this.globals.getEmail() )this.getTasks();
   }
 

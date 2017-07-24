@@ -9,6 +9,8 @@ const now = new Date();
 })
 export class DatepickerComponent implements OnInit{
   selectedDate : any;
+  model : any;
+  date : any;
   dateChanged(model){
     this.selectedDate = new Date(model.year,model.month-1,model.day);
     this._sharedataservice.selectedDate = this.selectedDate.toString();

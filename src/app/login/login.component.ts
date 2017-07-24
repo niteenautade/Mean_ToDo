@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private http : Http,private router:Router,private globals: Globals) {}
   loginstatus : string = '';
+  modelEmail : string;
+  modelPassword : string;
   onSubmit(data){
     console.log('making post request => ',data);
     this.http.post('/login',data).subscribe(

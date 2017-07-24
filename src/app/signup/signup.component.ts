@@ -12,7 +12,9 @@ import { countries } from './countries';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private globals: Globals,private router:Router,private http:Http) {}
+  constructor(public globals: Globals,private router:Router,private http:Http) {}
+  email : string;
+  password : string;
   contactNumber : any;
   countries = countries;
   countryCode = this.countries[0]['id'];
