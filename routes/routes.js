@@ -10,7 +10,7 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
         return password;
     }  
     function generateToken(data){
-        console.log("data",typeof(data),data);
+        console.log("generateToken data",typeof(data),data);
        return jwt.sign(data,process.env.JWT_SECRET_KEY,{
                 expiresIn : 3000
             });
@@ -25,7 +25,20 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
                 console.log("Doe",decode._doc)
                 newPassword = generatePassword();
                 console.log("New Generated Password",newPassword);
+                user={};
+                user['_id'] = decode._doc._id;
+                newPass = {};
+                newPass['local.password'] = User.genHash(newPassword);
+                console.log('newPass Hash', newPass);
                 nodemailerConfig.mailNewPassword(decode._doc.local.email,newPassword);
+                User.findOneAndUpdate(user,newPass, function(err, user) {
+                    if(user){
+                        console.log('user found in jwt verify');
+                    }
+                    else{
+                        console.log('user not found in jwt verify');
+                    }
+                });
             }
         })
     }

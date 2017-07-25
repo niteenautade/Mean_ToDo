@@ -50,7 +50,7 @@ var mailOptionsNewPassword = {
 
 module.exports.mailNewPassword = function(email,password){
     mailOptionsNewPassword['to'] = email;
-    bodyTemplate = 'Your New Password is: <b>'+password+'</b>.<p>Please change your password</p>';
+    bodyTemplate = 'Your New Password is: <b>'+password+'</b> <p>Please change your password</p>';
     mailOptionsNewPassword['html'] = bodyTemplate;
     transporter.sendMail(mailOptionsNewPassword, function (err, res) {
         if(err){
