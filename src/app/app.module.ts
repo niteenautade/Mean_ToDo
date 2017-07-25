@@ -14,12 +14,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { SharedataService } from './sharedata.service';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
   { path: 'forgotPassword', component: ForgotpasswordComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard]}, // , canActivate: [AuthGuard]
+  { path: 'changePassword', component: ChangepasswordComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ];
 
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     SignupComponent,
     DatepickerComponent,
     OldtasksComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    ChangepasswordComponent
   ],
   imports: [
     NgbModule.forRoot(),

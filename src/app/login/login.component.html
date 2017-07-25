@@ -47,11 +47,11 @@
             <input type="password" required class="form-control" [(ngModel)]="modelPassword" name="password">
         </div>
 
-        <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-warning btn-lg">Login</button>
+        <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-warning">Login</button>
     </form>
     <p style="color:red;font-style: italic;">{{loginstatus}}</p>
     <hr>
-    <a routerLink="/forgotPassword" routerLinkActive="active" class="btn btn-secondary"><span class="fa fa-user"></span> Forgot Password</a>
+    <a routerLink="/forgotPassword" routerLinkActive="active">Forgot Password ?</a>
     <p>Need an account? <a href="/signup">Signup</a></p>
     <p>Or go <a href="/">home</a>.</p>
 
