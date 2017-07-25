@@ -1,7 +1,50 @@
 // app/routes.js
 var Task = require('./../models/tasks');
-module.exports = function(app, passport,express,path,nodemailerConfig,twilioConfig) {
+var User = require('./../models/user');
+module.exports = function(app, passport,express,path,nodemailerConfig,twilioConfig,jwt,generator) {
+    function generatePassword(){
+        password = generator.generate({
+            length: 10,
+            numbers: true
+        });
+        return password;
+    }  
+    function generateToken(data){
+        console.log("data",typeof(data),data);
+       return jwt.sign(data,process.env.JWT_SECRET_KEY,{
+                expiresIn : 3000
+            });
+    }
+    function verifyToken(token){
+        
+        jwt.verify(token,process.env.JWT_SECRET_KEY,function(err,decode){
+            if(!decode){
+                console.log("Error in verifyToken")
+            }
+            else{
+                console.log("Doe",decode._doc)
+                newPassword = generatePassword();
+                console.log("New Generated Password",newPassword);
+                nodemailerConfig.mailNewPassword(decode._doc.local.email,newPassword);
+            }
+        })
+    }
 
+    app.post('/forgotPassword', function(req, res){
+         data = req.body;
+        
+        User.findOne({'local.email':data.email}, function(err, user) {
+            if(user){
+                var token = generateToken(user,res);
+                nodemailerConfig.mailResetPassword(data.email,token);
+                res.send("We have sent a link to your email to reset your password!");
+            }
+            else res.send("No such user is registered with us");
+        });
+    });
+    app.get('/resetPassword/:token', function(req, res){
+        verifyToken(req.params.token);
+    });
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -124,9 +167,9 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
     });*/
     app.get('/signup-success', function(req, res) {
         console.log('Sign up Successful',req.user.local.email);
-        nodemailerConfig.mailit(req.user.local.email);
+        nodemailerConfig.mailSignupSuccessful(req.user.local.email);
         contactNo = req.user.local.countryCode + req.user.local.contactNumber;
-        twilioConfig.sendSmsSignupSuccess(contactNo);
+        //twilioConfig.sendSmsSignupSuccess(contactNo);
         res.json(req.user);
         
     });

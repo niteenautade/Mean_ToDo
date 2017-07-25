@@ -17,7 +17,9 @@ var MongoStore = require('connect-mongo')(session);
 var configDB = require('./config/database.js');
 var nodemailerConfig = require('./config/nodemailerConfig');
 var twilioConfig = require('./config/twilioConfig');
-
+var generator = require('generate-password');
+var jwt = require('jsonwebtoken');
+process.env.JWT_SECRET_KEY = 'nitnitnit';
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -43,7 +45,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 //nodemailerConfig.mailit();
 // routes ======================================================================
 app.use('/', express.static(path.join(__dirname, '/src/app/dist')));
-require('./routes/routes.js')(app, passport,express,path,nodemailerConfig,twilioConfig); // load our routes and pass in our app and fully configured passport
+require('./routes/routes.js')(app, passport,express,path,nodemailerConfig,twilioConfig,jwt,generator); // load our routes and pass in our app and fully configured passport
 console.log('Buss',path.join(__dirname, '/src/app/dist/index.html'));
 
 // launch ======================================================================
