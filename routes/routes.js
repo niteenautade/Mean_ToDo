@@ -44,6 +44,7 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
     });
     app.get('/resetPassword/:token', function(req, res){
         verifyToken(req.params.token);
+        res.redirect('/');
     });
     // =====================================
     // HOME PAGE (with login links) ========
