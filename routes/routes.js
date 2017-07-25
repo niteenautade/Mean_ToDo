@@ -44,7 +44,7 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
     });
     app.get('/resetPassword/:token', function(req, res){
         verifyToken(req.params.token);
-        res.redirect('/');
+        res.send("Password Reset was done successfully. Now redirecting to home page in <span id='time'></span> seconds. <script>time=5;setInterval(function(){ console.log('Time',this.time);document.getElementById('time').innerHTML=this.time;this.time--; }, 1000);setTimeout(function(){window.location.href='/'},5000);</script>")
     });
     // =====================================
     // HOME PAGE (with login links) ========
