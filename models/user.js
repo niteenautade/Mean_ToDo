@@ -49,3 +49,6 @@ module.exports = mongoose.model('User', userSchema);
 module.exports.genHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
+module.exports.comparePass = function(uipassword,dbpassword) {
+    return bcrypt.compareSync(uipassword, dbpassword);
+};

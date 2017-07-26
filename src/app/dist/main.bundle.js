@@ -40,7 +40,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__global__ = __webpack_require__(20);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
@@ -108,8 +108,8 @@ var _a, _b, _c;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__global__ = __webpack_require__(20);
@@ -268,6 +268,7 @@ var _a, _b, _c, _d;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangepasswordComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -279,13 +280,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var ChangepasswordComponent = (function () {
-    function ChangepasswordComponent() {
+    function ChangepasswordComponent(_http) {
+        this._http = _http;
         this.newPassword = '';
         this.confirmNewPassword = '';
         this.currentPassword = '';
+        this.statusSuccess = '';
+        this.statusFailure = '';
     }
     ChangepasswordComponent.prototype.ngOnInit = function () {
+    };
+    ChangepasswordComponent.prototype.onSubmit = function (data) {
+        var _this = this;
+        this.statusFailure = '';
+        this.statusSuccess = '';
+        console.log('change Password data to be submitted', data);
+        this._http.post('/changePassword', data).subscribe(function (res) {
+            console.log(res.text());
+            data = res.json();
+            if (data.success == 200)
+                _this.statusSuccess = data.message;
+            else
+                _this.statusFailure = data.message;
+        });
     };
     return ChangepasswordComponent;
 }());
@@ -295,9 +314,10 @@ ChangepasswordComponent = __decorate([
         template: __webpack_require__(242),
         styles: [__webpack_require__(234)]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ChangepasswordComponent);
 
+var _a;
 //# sourceMappingURL=changepassword.component.js.map
 
 /***/ }),
@@ -353,7 +373,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ForgotpasswordComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -401,7 +421,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(19);
@@ -507,7 +527,7 @@ var _a, _b, _c;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(19);
@@ -576,7 +596,7 @@ var _a, _b, _c;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(19);
@@ -717,7 +737,7 @@ var countries = [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(19);
@@ -799,7 +819,7 @@ var environment = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(11);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Globals; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -994,7 +1014,7 @@ module.exports = "<div class=\"nav\">\r\n        <div class=\"nav-inner\" style=
 /***/ 242:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-3\"></div>\r\n  <div class=\"col-md-6\">\r\n    <h2 style=\"margin-top:10px;\">Change Password</h2>\r\n    <form style=\"padding-top:5px;\">\r\n      <div style=\"margin-bottom:15px;\">\r\n        <label for=\"currentPassword\">Current Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"currentPassword\" name=\"currentPassword\" class=\"form-control\">\r\n        <label for=\"newPassword\">New Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"newPassword\" name=\"newPassword\" class=\"form-control\">\r\n        <label for=\"confirmNewPassword\">Confirm New Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"confirmNewPassword\" name=\"confirmNewPassword\" class=\"form-control\" #confirmNewP=\"ngModel\">\r\n        <p *ngIf=\"newPassword != confirmNewPassword && confirmNewP.touched\" style=\"color:crimson\">Passwords Do Not Match</p>\r\n        <p *ngIf=\"newPassword == confirmNewPassword && confirmNewP.touched && currentPassword==newPassword\" style=\"color:crimson\">Current Password and New Password have to be different</p>\r\n      </div>\r\n\r\n      <button type=\"submit\" class=\"btn btn-warning\" [disabled]=\"newPassword!=confirmNewPassword || currentPassword==newPassword || newPassword=='' || confirmNewPassword=='' || currentPassword==''\" style=\"cursor:pointer\">Submit</button>\r\n    </form>\r\n  </div>\r\n  <div class=\"col-md-3\"></div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-3\"></div>\r\n  <div class=\"col-md-6\">\r\n    <h2 style=\"margin-top:10px;\">Change Password</h2>\r\n    <form *ngIf=\"statusSuccess==''\" style=\"padding-top:5px;\" (ngSubmit)=\"onSubmit(changePasswordForm.value)\" #changePasswordForm=\"ngForm\">\r\n      <div style=\"margin-bottom:15px;\">\r\n        <label for=\"currentPassword\">Current Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"currentPassword\" name=\"currentPassword\" class=\"form-control\">\r\n        <label for=\"newPassword\">New Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"newPassword\" name=\"newPassword\" class=\"form-control\">\r\n        <label for=\"confirmNewPassword\">Confirm New Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"confirmNewPassword\" name=\"confirmNewPassword\" class=\"form-control\" #confirmNewP=\"ngModel\">\r\n        <p *ngIf=\"newPassword != confirmNewPassword && confirmNewP.touched\" style=\"color:crimson\">Passwords Do Not Match</p>\r\n        <p *ngIf=\"newPassword == confirmNewPassword && confirmNewP.touched && currentPassword==newPassword\" style=\"color:crimson\">Current Password and New Password have to be different</p>\r\n      </div>\r\n\r\n      <button type=\"submit\" class=\"btn btn-warning\" [disabled]=\"newPassword!=confirmNewPassword || currentPassword==newPassword || newPassword=='' || confirmNewPassword=='' || currentPassword==''\" style=\"cursor:pointer\">Submit</button>\r\n    </form>\r\n    <p *ngIf=\"statusSuccess!=''\" style=\"color:green;font-style:italic\">{{statusSuccess}}</p>\r\n    <p *ngIf=\"statusFailure!=''\" style=\"color:red;font-style:italic\">{{statusFailure}}</p>\r\n  </div>\r\n  <div class=\"col-md-3\"></div>\r\n</div>"
 
 /***/ }),
 

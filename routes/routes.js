@@ -43,6 +43,42 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
         })
     }
 
+    app.post('/changePassword',function(req,res){
+        data = req.body;
+        currentPasswordMatchesWithDBPassword = false;
+        console.log("data",data)
+        currentPassword = data.currentPassword;
+        currentPasswordHash = User.genHash(currentPassword);
+        console.log('currentPasswordHash : ',currentPasswordHash)
+        newPassword = data.newPassword;
+        newPasswordHash = User.genHash(newPassword);
+        console.log('New Password Hash',newPasswordHash);
+        sessionData = req.user;
+        email = sessionData['local']['email'];
+        console.log("Email:",email);
+        User.findOne({'local.email':email},function(err,user){
+            console.log("dbPass",user.local.password);
+            console.log("comparePass",User.comparePass(currentPassword,user.local.password));
+            passwordsMatch = User.comparePass(currentPassword,user.local.password);
+            if(passwordsMatch==true){
+                this.currentPasswordMatchesWithDBPassword = true;
+                console.log("Great! Current Passord Matches With DB current password");
+                user.local.password = newPasswordHash;
+                user.save(function(err){
+                    if(err)console.log("Error",err);
+                    else console.log('Congrats. Password Successfully Updated In DB');
+                    res.send({'success':200,'message':'Congrats. Password Successfully Updated In DB'});
+                });
+            } 
+            else{
+                this.currentPasswordMatchesWithDBPassword = false;
+                console.log("Current Passord Doesnt Match With DB current password");
+                res.send({'success':401,'message':'Current Password Doesnt Match With DB current password. Please Try Again'});
+            }
+            if(err)console.log('err',err);
+        });
+        
+    });
     app.post('/forgotPassword', function(req, res){
          data = req.body;
         
