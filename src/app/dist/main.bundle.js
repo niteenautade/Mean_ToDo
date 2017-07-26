@@ -281,6 +281,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ChangepasswordComponent = (function () {
     function ChangepasswordComponent() {
+        this.newPassword = '';
+        this.confirmNewPassword = '';
+        this.currentPassword = '';
     }
     ChangepasswordComponent.prototype.ngOnInit = function () {
     };
@@ -991,7 +994,7 @@ module.exports = "<div class=\"nav\">\r\n        <div class=\"nav-inner\" style=
 /***/ 242:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  changepassword works!\r\n</p>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-md-3\"></div>\r\n  <div class=\"col-md-6\">\r\n    <h2 style=\"margin-top:10px;\">Change Password</h2>\r\n    <form style=\"padding-top:5px;\">\r\n      <div style=\"margin-bottom:15px;\">\r\n        <label for=\"currentPassword\">Current Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"currentPassword\" name=\"currentPassword\" class=\"form-control\">\r\n        <label for=\"newPassword\">New Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"newPassword\" name=\"newPassword\" class=\"form-control\">\r\n        <label for=\"confirmNewPassword\">Confirm New Password</label>\r\n        <input type=\"text\" [(ngModel)]=\"confirmNewPassword\" name=\"confirmNewPassword\" class=\"form-control\" #confirmNewP=\"ngModel\">\r\n        <p *ngIf=\"newPassword != confirmNewPassword && confirmNewP.touched\" style=\"color:crimson\">Passwords Do Not Match</p>\r\n        <p *ngIf=\"newPassword == confirmNewPassword && confirmNewP.touched && currentPassword==newPassword\" style=\"color:crimson\">Current Password and New Password have to be different</p>\r\n      </div>\r\n\r\n      <button type=\"submit\" class=\"btn btn-warning\" [disabled]=\"newPassword!=confirmNewPassword || currentPassword==newPassword || newPassword=='' || confirmNewPassword=='' || currentPassword==''\" style=\"cursor:pointer\">Submit</button>\r\n    </form>\r\n  </div>\r\n  <div class=\"col-md-3\"></div>\r\n</div>"
 
 /***/ }),
 
