@@ -57,10 +57,10 @@
                 <ul>
                     <li *ngFor='let task of tasks' class="row">
                         <div class="col-md-4"></div>
-                        <div class="col-md-4 text-center tab" [style.text-decoration]="taskDone(task.done)" (click)="toggleTask(task._id,task.done)">
+                        <div class="col-md-4 col-8 text-center tab" [style.text-decoration]="taskDone(task.done)" (click)="toggleTask(task._id,task.done)">
                             <a class="tab-cell" style="text-decoration: none;color: inherit;">{{task.task}}</a>
                         </div>
-                        <div class="col-md-4 text-right">
+                        <div class="col-md-4 col-4 text-right">
                             <button class="btn btn-secondary" (click)="deleteTask(task._id)" style="cursor:pointer">Delete</button>
                         </div>
 
