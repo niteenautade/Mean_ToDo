@@ -103,17 +103,11 @@ module.exports = function(app, passport,express,path,nodemailerConfig,twilioConf
     });*/
     
     app.get('/api/get/:userid',checkAuth, function(req, res){
-        // get all the task
-        console.log("Today's Date:",new Date());
+        // get all the tasks        
         console.log('/api/get/:userid =>',req.params.userid);
         var user = {};
         user['id']=req.params.userid; //'id' refers to userid ... '_id' refers to task id
-        var start = new Date();
-        start.setHours(0,0,0,0);
-
-        var end = new Date();
-        end.setHours(23,59,59,999);
-        user['created_at']={$gte: start, $lt: end};
+        
         Task.find(user, function(err, tasks) {
         if (err) throw err;
         res.send(tasks);

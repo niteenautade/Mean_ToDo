@@ -15,12 +15,15 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { SharedataService } from './sharedata.service';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
   { path: 'forgotPassword', component: ForgotpasswordComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard]}, // , canActivate: [AuthGuard]
+  { path: 'analytics', component: AnalyticsComponent, canActivate: [AuthGuard]}, // , canActivate: [AuthGuard]
   { path: 'changePassword', component: ChangepasswordComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ];
@@ -34,14 +37,16 @@ const appRoutes: Routes = [
     DatepickerComponent,
     OldtasksComponent,
     ForgotpasswordComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    AnalyticsComponent
   ],
   imports: [
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ChartsModule
   ],
   providers: [Globals,AuthGuard,LoginGuard,SharedataService],
   bootstrap: [AppComponent]

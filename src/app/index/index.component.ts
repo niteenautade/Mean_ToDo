@@ -13,6 +13,7 @@ export class IndexComponent implements OnInit {
   tasks = [];
   error:string='';
   showLoading:boolean=false;
+  todaysDate:any = new Date();
   constructor(public globals: Globals,private router:Router,private http:Http) {
     if(this.globals.getEmail() )this.getTasks();
   }
@@ -23,7 +24,7 @@ export class IndexComponent implements OnInit {
   
   getTasks(){
     this.showLoading = true;
-    this.http.get('/api/get/'+this.globals.getId()).subscribe(res=>{
+    this.http.get('/api/get/'+this.globals.getId()+'/'+this.todaysDate).subscribe(res=>{
       setTimeout(()=>{
         this.showLoading = false;
         try{
