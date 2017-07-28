@@ -28,10 +28,11 @@
             <h3 class="text-center">Yearly</h3>
             <form (ngSubmit)="getBarChartForThisParticularYear(yearForm.value)" #yearForm="ngForm">
                   <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-1"></div>
+                        <div class="col-md-9 col-7">
                               <input [(ngModel)]="presentYear" type="number" name="year" class="form-control">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-4">
                               <button type="submit" class="btn" style="background-color:#86C7F3;color:white;">Submit</button>
                         </div>
                   </div>
