@@ -17,6 +17,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { SearchComponent } from './search/search.component';
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard] },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   { path: 'oldtasks', component: OldtasksComponent, canActivate: [AuthGuard]}, // , canActivate: [AuthGuard]
   { path: 'analytics', component: AnalyticsComponent, canActivate: [AuthGuard]}, // , canActivate: [AuthGuard]
   { path: 'changePassword', component: ChangepasswordComponent, canActivate: [AuthGuard]},
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ];
 
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     OldtasksComponent,
     ForgotpasswordComponent,
     ChangepasswordComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    SearchComponent
   ],
   imports: [
     NgbModule.forRoot(),

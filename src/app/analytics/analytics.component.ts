@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DatepickerComponent } from './../datepicker/datepicker.component';
+import { Component, OnInit } from '@angular/core'
 import { Http, Headers } from '@angular/http';  
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { Globals } from './../global';
-import {SharedataService} from './../sharedata.service'
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @Component({
@@ -41,7 +39,7 @@ export class AnalyticsComponent implements OnInit {
         catch(e){
           console.log('errrr',e);
           this.error = ' Session Expired! Please Login Again! ';
-          //window.location.reload();
+          window.location.reload();
         }
       },200);
     });

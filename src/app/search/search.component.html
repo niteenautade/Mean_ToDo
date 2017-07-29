@@ -1,0 +1,22 @@
+<div class=row>
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2 class="text-center" style="padding:20px 0px 20px 0px">Search Task</h2>
+    <input type="text" name="search" [(ngModel)]="search" (input)="searchTask(search)"  class="form-control" placeholder="Search a task">
+    <div style="padding-top:10px;">
+      <p>Found {{searchedList.length}} entries</p>
+      <ul>
+        <li *ngFor="let task of searchedList">
+          <div><b>Task</b> : {{task.task}}</div>
+          <div><b>Created on</b> : {{task.created_at | date}}</div>
+          <div *ngIf="task.done">This Task was <b>Done</b></div>
+          <div *ngIf="!task.done">This Task was <b>Not done</b></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-3"> </div>
+</div>
+<div *ngIf="showLoading" style="z-index: 1px;position:fixed;top:50%;left:50%;margin-left:-47px; margin-top:-47px;">
+      <img src="loading.gif" alt="loading">
+</div>
